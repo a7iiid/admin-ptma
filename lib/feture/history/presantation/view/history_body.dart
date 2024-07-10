@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:admin/feture/driver/data/manger/cubit/driver_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '/feture/history/presantation/manegar/cubit/history_cubit.dart';
@@ -12,35 +13,34 @@ class HistoryBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocProvider(
-        create: (context) => HistoryCubit()..loadTripsForCurrentUser(),
-        child: BlocConsumer<HistoryCubit, HistoryState>(
-          listener: (context, state) {},
-          builder: (context, state) {
-            var cubit = HistoryCubit.get(context);
+      body: BlocConsumer<DriverCubit, DriverState>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          var cubit = DriverCubit.get(context);
 
-            if (state is HistorySuccess) {
-              return CustomScrollView(
-                slivers: [
-                  SliverList.builder(
-                    itemCount: state.history.length,
-                    itemBuilder: (context, index) {
-                      return CustomCard(
-                        history: state.history[index],
-                      );
-                    },
-                  )
-                ],
-              );
-            } else if (state is HistoryFailure) {
-              return state.error;
-            } else {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-          },
-        ),
+          if (state is DriverHistorySuccess) {
+            return CustomScrollView(
+              slivers: [
+                SliverList.builder(
+                  itemCount: state.historyDriver.length,
+                  itemBuilder: (context, index) {
+                    return CustomCard(
+                      history: state.historyDriver[index],
+                    );
+                  },
+                )
+              ],
+            );
+          } else if (state is DriverFailure) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          } else {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        },
       ),
     );
   }

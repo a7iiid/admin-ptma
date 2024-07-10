@@ -30,11 +30,7 @@ class DriverCubit extends Cubit<DriverState> {
     emit(DriverLoading());
     streamDriverModel().listen((fetchedBusModels) async {
       try {
-        QuerySnapshot querySnapshot = await instance.collection('Users').get();
-        log(querySnapshot.toString());
-        drivers = querySnapshot.docs.map((doc) {
-          return Driver.fromJson(doc.data() as Map<String, dynamic>);
-        }).toList();
+        drivers = fetchedBusModels;
         emit(DriverLoaded(drivers: drivers));
       } catch (e) {
         emit(DriverFailure(error: e.toString()));
@@ -42,6 +38,7 @@ class DriverCubit extends Cubit<DriverState> {
     });
   }
 
+//// get trip data for driver
   Stream<List<History>> streamTripeHistory() async* {
     yield* FirebaseFirestore.instance
         .collection('Trips')
@@ -56,6 +53,7 @@ class DriverCubit extends Cubit<DriverState> {
     emit(DriverHistoryLoading());
     streamTripeHistory().listen((fetchedHistory) async {
       try {
+        log(fetchedHistory.toString());
         history = fetchedHistory;
         emit(DriverHistorySuccess(historyDriver: history));
       } catch (e) {
