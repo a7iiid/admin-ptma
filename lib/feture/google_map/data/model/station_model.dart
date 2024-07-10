@@ -3,10 +3,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class StationModel {
   String name;
   GeoPoint stationLocation;
-  String Id;
+  String? Id;
 
-  StationModel(
-      {required this.Id, required this.stationLocation, required this.name});
+  StationModel({this.Id, required this.stationLocation, required this.name});
   factory StationModel.fromJson(Map<String, dynamic> json, String id) {
     return StationModel(
       Id: id,

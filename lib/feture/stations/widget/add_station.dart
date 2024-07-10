@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+import '../../google_map/data/model/station_model.dart';
 import '../../google_map/manegar/cubit/map_cubit.dart';
 
 class AddStation extends StatefulWidget {
@@ -15,14 +16,12 @@ class AddStation extends StatefulWidget {
 }
 
 class _AddStationState extends State<AddStation> {
-  @override
   TextEditingController stationName = TextEditingController();
 
   void _showEditDialog(BuildContext context) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        stationName.text = MapCubit.get(context).selectStation.name;
         return AlertDialog(
           title: Text('Station Name'),
           content: Column(
@@ -44,11 +43,10 @@ class _AddStationState extends State<AddStation> {
             TextButton(
               onPressed: () async {
                 if (stationName.text.isNotEmpty) {
-                  MapCubit.get(context).newStation!.name = stationName.text;
-                  await MapCubit.get(context).updateStation();
+                  await MapCubit.get(context).addStation(stationName.text);
 
-                  Navigator.of(context).pop();
-                } // Close the dialog
+                  Navigator.of(context).pop(); // Close the dialog
+                }
               },
               child: Text('Save'),
             ),
@@ -58,15 +56,17 @@ class _AddStationState extends State<AddStation> {
     );
   }
 
+  @override
   Widget build(BuildContext context) {
     var cubit = MapCubit.get(context);
     return BlocBuilder<MapCubit, MapState>(builder: (context, state) {
       return PopScope(
-          canPop: true,
-          onPopInvoked: (didPop) {
-            MapCubit.get(context).clear();
-          },
-          child: GoogleMap(
+        canPop: true,
+        onPopInvoked: (didPop) async {
+          await MapCubit.get(context).clear();
+        },
+        child: Scaffold(
+          body: GoogleMap(
             myLocationEnabled: true,
             myLocationButtonEnabled: false,
             zoomControlsEnabled: false,
@@ -79,16 +79,27 @@ class _AddStationState extends State<AddStation> {
             onMapCreated: (controller) {
               cubit.googleMapController = controller;
             },
-            onTap: (destnation) async {
-              try {
-                cubit.newStation!.stationLocation = destnation as GeoPoint;
-                _showEditDialog(context);
-                //cubit.displayUserPoint(await cubit.getRouteUserData());
-              } catch (e) {}
+            onTap: (destination) async {
+              if (cubit.newStation == null) {
+                cubit.newStation = StationModel(
+                  name: '',
+                  stationLocation:
+                      GeoPoint(0, 0), // Initialize with default value
+                );
+              }
+              cubit.newStation!.stationLocation =
+                  convertLatLngToGeoPoint(destination);
+              _showEditDialog(context);
             },
             markers: cubit.markers,
             polylines: cubit.polylines,
-          ));
+          ),
+        ),
+      );
     });
   }
+}
+
+GeoPoint convertLatLngToGeoPoint(LatLng latLng) {
+  return GeoPoint(latLng.latitude, latLng.longitude);
 }

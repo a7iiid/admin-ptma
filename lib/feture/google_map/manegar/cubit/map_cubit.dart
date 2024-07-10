@@ -94,13 +94,10 @@ class MapCubit extends Cubit<MapState> {
     emit(LodeingStation());
     streamStation().listen((fetchedStation) async {
       try {
-        log(fetchedStation.toString());
-
         stationModel = fetchedStation;
-        for (var station in fetchedStation) {
-          final busLocation = LatLng(station.stationLocation.latitude,
-              station.stationLocation.longitude);
-        }
+        log(stationModel.toString());
+        setStation();
+
         emit(SuccessLoding());
       } on Exception catch (e) {
         emit(FiluerLoding());
@@ -120,11 +117,11 @@ class MapCubit extends Cubit<MapState> {
     emit(ChangeStationData());
   }
 
-  Future<void> AddStation() async {
+  Future<void> addStation(String stationName) async {
     emit(ChangeStationData());
 
     await FirebaseFirestore.instance.collection('station').add({
-      'name': newStation!.name,
+      'name': stationName,
       'stationLocation': newStation!.stationLocation,
     });
     emit(ChangeStationData());
@@ -143,7 +140,9 @@ class MapCubit extends Cubit<MapState> {
               infoWindow: InfoWindow(title: station.name),
             ))
         .toSet();
-    markers.addAll(myMarker);
+    log(markers.toString());
+    markers = myMarker;
+    log(markers.toString());
     emit(SuccessSetStation());
   }
 
@@ -217,27 +216,6 @@ class MapCubit extends Cubit<MapState> {
     }
   }
 
-  // Future<List<LatLng>> getRouteBusData() async {
-  //   // await displaySelectedBusLocation();
-  //   busLocation = LatLng(
-  //       selectedBus!.busLocation.latitude, selectedBus!.busLocation.longitude);
-
-  //   endStation =
-  //       LatLng(userLocationData!.latitude, userLocationData!.longitude);
-  //   RoutesModel route = await routesService.fetchRoutes(
-  //       origindata: busLocation!, destinationData: endStation!);
-
-  //   List<PointLatLng> result = polylinePoints
-  //       .decodePolyline(route.routes!.first.polyline!.encodedPolyline!);
-  //   List<LatLng> pointes =
-  //       result.map((e) => LatLng(e.latitude, e.longitude)).toList();
-  //   log("${busLocation}start");
-  //   log("===================");
-  //   log("${endStation}end");
-
-  //   return pointes;
-  // }
-
   void displayBusPoint(List<LatLng> point) {
     Polyline route = Polyline(
         polylineId: PolylineId('busRoute'),
@@ -250,54 +228,3 @@ class MapCubit extends Cubit<MapState> {
     emit(MapSetLine());
   }
 }
-//  Future<void> makeLines({LatLng? start, LatLng? end}) async {
-//     emit(MapSetLine());
-//     await PolylinePoints()
-//         .getRouteBetweenCoordinates(
-//       apikey,
-//       PointLatLng(userLocationData.latitude,
-//           userLocationData.longitude), //Starting LATLANG
-//       PointLatLng(userDestnationData.latitude,
-//           userDestnationData.longitude), //End LATLANG
-
-//       travelMode: TravelMode.driving,
-//     )
-//         .then((value) {
-//       value.points.forEach((PointLatLng point) {
-//         polylineCoordinates.add(LatLng(point.latitude, point.longitude));
-//         // routesService.destans(userDestnationData, userLocationData);
-//       });
-//     }).then((value) {
-//       addPolyLine();
-//     });
-//     if (start != null && end != null) {
-//       await PolylinePoints()
-//           .getRouteBetweenCoordinates(
-//         'AIzaSyBA9z9yyAAM6us9MlZtuPkcFgXMOBzozSo',
-//         PointLatLng(start.latitude, start.longitude), //Starting LATLANG
-//         PointLatLng(end.latitude, end.longitude), //End LATLANG
-
-//         travelMode: TravelMode.driving,
-//       )
-//           .then((value) {
-//         value.points.forEach((PointLatLng point) {
-//           polylineCoordinates.add(LatLng(point.latitude, point.longitude));
-//           // routesService.destans(userDestnationData, userLocationData);
-//         });
-//       }).then((value) {
-//         addPolyLine();
-//       });
-//     }
-//   }
-
-//   addPolyLine() {
-//     PolylineId id = PolylineId("poly");
-//     Polyline polyline = Polyline(
-//         polylineId: id,
-//         color: Colors.green,
-//         points: polylineCoordinates,
-//         startCap: Cap.roundCap,
-//         width: 4);
-//     polylines.add(polyline);
-//     emit(MapSuccess());
-//   }
