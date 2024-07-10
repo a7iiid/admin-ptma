@@ -41,9 +41,17 @@
     "Admins":"Admins",
     "Driver":"Driver",
     "Station":"Station",
-    "Edit Bus":"Edit Bus"
+    "Edit Bus":"Edit Bus",
 
-
+    "Add Bus":"Add Bus",
+    "Bus Name":"Bus Name",
+    "Bus Number":"Bus Number",
+"Station Name":"Station Name",
+"Cancel":"Cancel",
+"Delete":"Delete"
+,
+"Are You Sure":"Are You Sure",
+"Is Active":"Is Active"
 
 
 }

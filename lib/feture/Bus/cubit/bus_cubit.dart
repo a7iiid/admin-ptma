@@ -14,8 +14,7 @@ part 'bus_state.dart';
 
 class BusCubit extends Cubit<BusState> {
   BusCubit() : super(BusInitial());
- static BusCubit get(context) =>
-      BlocProvider.of<BusCubit>(context);
+  static BusCubit get(context) => BlocProvider.of<BusCubit>(context);
 
 ////////////////////////////////////////
   List<Bus> busModel = [];
@@ -26,11 +25,8 @@ class BusCubit extends Cubit<BusState> {
 ////////////////////////////////////
 
   Stream<List<Bus>> streamBusModels() async* {
-    yield* FirebaseFirestore.instance
-        .collection('bus')
-        
-        .snapshots()
-        .map((querySnapshot) => querySnapshot.docs
+    yield* FirebaseFirestore.instance.collection('bus').snapshots().map(
+        (querySnapshot) => querySnapshot.docs
             .map((doc) =>
                 Bus.fromJson(doc.data() as Map<String, dynamic>, doc.id))
             .toList());
@@ -44,9 +40,9 @@ class BusCubit extends Cubit<BusState> {
         busModel = fetchedBusModels;
         for (var busModel in fetchedBusModels) {
           final busLocation = LatLng(
-              busModel.busLocation.latitude, busModel.busLocation.longitude);
+              busModel.busLocation!.latitude, busModel.busLocation!.longitude);
           final destinationLocation = LatLng(
-              busModel.endStation.latitude, busModel.endStation.longitude);
+              busModel.endStation!.latitude, busModel.endStation!.longitude);
         }
         emit(StreamBusModel(busModel: fetchedBusModels));
       } catch (e) {
@@ -55,11 +51,4 @@ class BusCubit extends Cubit<BusState> {
       }
     });
   }
-
- 
-
-  
-
-  
-  
 }

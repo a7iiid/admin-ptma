@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:admin/core/utils/localization/app_localaization.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,13 +24,14 @@ class _AddStationState extends State<AddStation> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Station Name'),
+          title: Text('Station Name'.tr(context)),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               TextFormField(
                 controller: stationName,
-                decoration: InputDecoration(labelText: 'Station Name'),
+                decoration:
+                    InputDecoration(labelText: 'Station Name'.tr(context)),
               ),
             ],
           ),
@@ -38,7 +40,7 @@ class _AddStationState extends State<AddStation> {
               onPressed: () {
                 Navigator.of(context).pop(); // Close the dialog
               },
-              child: Text('Cancel'),
+              child: Text('Cancel'.tr(context)),
             ),
             TextButton(
               onPressed: () async {
@@ -48,7 +50,7 @@ class _AddStationState extends State<AddStation> {
                   Navigator.of(context).pop(); // Close the dialog
                 }
               },
-              child: Text('Save'),
+              child: Text('Save'.tr(context)),
             ),
           ],
         );

@@ -23,6 +23,8 @@ final class ChangeDistnationStation extends SelectRoutState {}
 
 final class ChangeBusData extends SelectRoutState {}
 
+final class AddBusState extends SelectRoutState {}
+
 final class StreamBusModel extends SelectRoutState {
   final List<BusModel> busModel;
 

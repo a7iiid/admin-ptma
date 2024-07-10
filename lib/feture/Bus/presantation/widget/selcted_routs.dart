@@ -1,4 +1,5 @@
-import 'package:admin/feture/Bus/presantation/widget/body_selecte_rout.dart';
+import 'package:admin/feture/Bus/presantation/widget/add_bus.dart';
+import 'package:admin/feture/Bus/presantation/widget/bus_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -32,6 +33,15 @@ class _SelectRoutsState extends State<SelectRouts> {
     var cubit = SelectRoutCubit.get(context);
 
     return Scaffold(
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => AddBus()),
+            );
+          },
+          child: Icon(Icons.add),
+        ),
         drawer: CustomeDrawer(),
         body: SafeArea(
             child: Column(

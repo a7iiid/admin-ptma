@@ -40,7 +40,19 @@
     "Admins":"اداريين",
     "Driver":"سائقين",
     "Station":"محطات",
-    "Edit Bus":"صفحة التعديل"
+    "Edit Bus":"صفحة التعديل",
+
+    
+    "Add Bus":"Add Bus",
+    "Bus Name":"Bus Name",
+    "Bus Number":"Bus Number",
+"Station Name":"Station Name",
+"Cancel":"Cancel",
+"Delete":"Delete"
+,
+"Are You Sure":"Are You Sure",
+"Is Active":"Is Active"
+
 
 
 

@@ -1,3 +1,4 @@
+import 'package:admin/core/utils/localization/app_localaization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -65,8 +66,8 @@ class StationBodyList extends StatelessWidget {
                         context: context,
                         dialogType: DialogType.warning,
                         animType: AnimType.bottomSlide,
-                        title: 'Delete',
-                        desc: 'Are You Sure',
+                        title: 'Delete'.tr(context),
+                        desc: 'Are You Sure'.tr(context),
                         btnCancelOnPress: () {},
                         btnOkOnPress: () async {
                           await cubit.deleteStation(cubit.stationModel[index]);

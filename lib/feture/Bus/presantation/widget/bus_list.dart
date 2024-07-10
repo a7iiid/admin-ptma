@@ -24,9 +24,7 @@ class bodySelecteRout extends StatelessWidget {
                   return Column(mainAxisSize: MainAxisSize.min, children: [
                     ListTile(
                       title: Text(cubit.busModel[index].busname),
-                      subtitle: Text(cubit.busModel[index].busnumber),
-                      trailing: Text(
-                          "${cubit.busModel[index].duration?.durationText}"),
+                      trailing: Text(cubit.busModel[index].busnumber),
                       onLongPress: () {
                         cubit.selectBus = cubit.busModel[index];
                         Navigator.push(

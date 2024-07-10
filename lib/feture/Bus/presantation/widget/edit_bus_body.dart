@@ -1,8 +1,10 @@
+import 'package:admin/core/utils/localization/app_localaization.dart';
 import 'package:admin/feture/google_map/data/model/bus_model.dart';
 import 'package:admin/feture/google_map/manegar/cubit/select_rout_cubit.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../google_map/data/model/station_model.dart';
 import '../../../home/presentation/view/widget/station_menue.dart';
@@ -23,10 +25,13 @@ class _EditBusBodyState extends State<EditBusBody> {
   StationModel? sourseStation;
 
   StationModel? distnationStation;
+  bool? isActive;
+
   @override
   void initState() {
     nameBus.text = SelectRoutCubit.get(context).selectBus.busname;
     numBus.text = SelectRoutCubit.get(context).selectBus.busnumber;
+    isActive = SelectRoutCubit.get(context).selectBus.isActive;
     super.initState();
   }
 
@@ -43,14 +48,16 @@ class _EditBusBodyState extends State<EditBusBody> {
               Expanded(
                 child: TextFormField(
                   controller: nameBus,
-                  decoration: InputDecoration(labelText: 'Bus Name'),
+                  decoration:
+                      InputDecoration(labelText: 'Bus Name'.tr(context)),
                 ),
               ),
               SizedBox(width: 16.0),
               Expanded(
                 child: TextFormField(
                   controller: numBus,
-                  decoration: InputDecoration(labelText: 'Bus Number'),
+                  decoration:
+                      InputDecoration(labelText: 'Bus Number'.tr(context)),
                 ),
               ),
             ],
@@ -80,6 +87,25 @@ class _EditBusBodyState extends State<EditBusBody> {
             },
           ),
           SizedBox(height: 24.0),
+          Row(
+            children: [
+              BlocBuilder<SelectRoutCubit, SelectRoutState>(
+                builder: (context, state) {
+                  return Checkbox(
+                    value: isActive,
+                    onChanged: (bool? value) {
+                      isActive = value ?? true;
+                      SelectRoutCubit.get(context).selectBus.isActive =
+                          isActive ?? false;
+                      SelectRoutCubit.get(context).enabelBus();
+                    },
+                  );
+                },
+              ),
+              Text('Is Active'.tr(context))
+            ],
+          ),
+          const SizedBox(height: 24.0),
           ElevatedButton(
             onPressed: () async {
               SelectRoutCubit.get(context).selectBus.busname = nameBus.text;
@@ -88,7 +114,7 @@ class _EditBusBodyState extends State<EditBusBody> {
               await SelectRoutCubit.get(context).updateBusData();
               Navigator.pop(context); // Close the edit page after saving
             },
-            child: Text('Save'),
+            child: Text('Save'.tr(context)),
           ),
         ],
       ),

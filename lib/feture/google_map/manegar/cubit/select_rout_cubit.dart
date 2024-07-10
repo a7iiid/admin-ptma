@@ -6,6 +6,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:meta/meta.dart';
+import '../../../Bus/data/bus.dart';
 import '/feture/google_map/data/model/distance_model/distance_model.dart';
 import '/feture/google_map/manegar/cubit/driver_cubit.dart';
 
@@ -33,31 +34,35 @@ class SelectRoutCubit extends Cubit<SelectRoutState> {
   Stream<List<BusModel>> streamBusModels() async* {
     yield* FirebaseFirestore.instance
         .collection('bus')
-        .where('isActive', isEqualTo: true)
         .snapshots()
-        .map((querySnapshot) => querySnapshot.docs
-            .map((doc) =>
-                BusModel.fromJson(doc.data() as Map<String, dynamic>, doc.id))
-            .toList());
+        .map((querySnapshot) {
+      log(querySnapshot.docs.toString());
+      return querySnapshot.docs
+          .map((doc) {
+            final data = doc.data() as Map<String, dynamic>?;
+            if (data != null) {
+              return BusModel.fromJson(data, doc.id);
+            } else {
+              log("Null data in document: ${doc.id}");
+              return null;
+            }
+          })
+          .cast<BusModel>()
+          .toList();
+    });
   }
 
   void loadBusModels() async {
     streamBusModels().listen((fetchedBusModels) async {
       try {
+        busModel = fetchedBusModels;
+
         log(fetchedBusModels.toString());
 
-        busModel = fetchedBusModels;
-        for (var busModel in fetchedBusModels) {
-          final busLocation = LatLng(
-              busModel.busLocation.latitude, busModel.busLocation.longitude);
-          final destinationLocation = LatLng(
-              busModel.endStation.latitude, busModel.endStation.longitude);
-          busModel.duration = await destans(busLocation, destinationLocation);
-        }
         emit(StreamBusModel(busModel: fetchedBusModels));
       } catch (e) {
-        // Handle error
         log("Error loading bus models: $e");
+        emit(StreamBusModel(busModel: [])); // Emit empty list on error
       }
     });
   }
@@ -81,7 +86,12 @@ class SelectRoutCubit extends Cubit<SelectRoutState> {
       'busnumber': selectBus.busnumber,
       'endStation': selectBus.endStation,
       'startStation': selectBus.startStation,
+      'isActive': selectBus.isActive,
     });
+  }
+
+  void enabelBus() {
+    emit(ChangeBusData());
   }
 
   Future<DistanceModel> destans(LatLng destination, LatLng source) async {
@@ -95,5 +105,18 @@ class SelectRoutCubit extends Cubit<SelectRoutState> {
     } on Exception catch (e) {
       throw Exception(e);
     }
+  }
+
+  Future<void> addBus(Bus bus) async {
+    emit(AddBusState());
+    await FirebaseFirestore.instance.collection("bus").add({
+      "busname": bus.busname,
+      "busnumber": bus.busnumber,
+      "endStation": bus.endStation,
+      "startStation": bus.startStation,
+      "busLocation": bus.busLocation,
+      "isActive": true
+    });
+    emit(AddBusState());
   }
 }
