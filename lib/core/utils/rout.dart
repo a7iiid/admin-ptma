@@ -1,7 +1,7 @@
 import 'package:admin/core/utils/splash/splash.dart';
 import 'package:admin/feture/Bus/bus_view.dart';
 import 'package:admin/feture/admin/admin_view.dart';
-import 'package:admin/feture/driver/drivers_view.dart';
+import 'package:admin/feture/driver/presantation/view/drivers_view.dart';
 import 'package:admin/feture/stations/station_view.dart';
 import 'package:go_router/go_router.dart';
 import '/../feture/autth/presentation/view/signin.dart';
