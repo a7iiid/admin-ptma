@@ -1,65 +1,62 @@
+import 'package:admin/core/utils/localization/app_localaization.dart';
+import 'package:admin/feture/driver/data/model/DriverModel.dart';
 import 'package:flutter/material.dart';
 
 class DriverCard extends StatelessWidget {
-  final String driverName;
-  final String photoUrl;
-  final String phoneNumber;
-  final String busNum;
+  DriverModel driverModel;
 
-  const DriverCard({
-    Key? key,
-    required this.driverName,
-    required this.photoUrl,
-    required this.phoneNumber,
-    required this.busNum,
-  }) : super(key: key);
+  DriverCard({Key? key, required this.driverModel}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 5.0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15.0),
-      ),
-      child: Container(
-        padding: EdgeInsets.all(16.0),
-        child: Row(
-          children: [
-            CircleAvatar(
-              radius: 40.0,
-              backgroundImage: NetworkImage(photoUrl),
-              backgroundColor: Colors.grey[200],
-            ),
-            SizedBox(width: 16.0),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    driverName,
-                    style: TextStyle(
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(height: 8.0),
-                  Text(
-                    'Phone: $phoneNumber',
-                    style: TextStyle(
-                      fontSize: 16.0,
-                    ),
-                  ),
-                  SizedBox(height: 8.0),
-                  Text(
-                    'Bus Number: $busNum',
-                    style: TextStyle(
-                      fontSize: 16.0,
-                    ),
-                  ),
-                ],
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Card(
+        elevation: 5.0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15.0),
+        ),
+        child: Container(
+          padding: EdgeInsets.all(16.0),
+          child: Row(
+            children: [
+              CircleAvatar(
+                radius: 40.0,
+                backgroundImage: NetworkImage(driverModel.photoUrl ?? ""),
+                backgroundColor: Colors.grey[200],
               ),
-            ),
-          ],
+              SizedBox(width: 16.0),
+              Expanded(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      driverModel.driverName,
+                      style: const TextStyle(
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: 8.0),
+                    Text(
+                      'Phone:'.tr(context) + ' ${driverModel.phoneNumber}',
+                      style: const TextStyle(
+                        fontSize: 16.0,
+                      ),
+                    ),
+                    SizedBox(height: 8.0),
+                    Text(
+                      'Bus Number:'.tr(context) + ' ${driverModel.busNum}',
+                      style: const TextStyle(
+                        fontSize: 16.0,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
