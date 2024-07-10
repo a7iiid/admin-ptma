@@ -38,3 +38,5 @@ final class SetSelectedBus extends MapState {}
 final class MapClear extends MapState {}
 
 final class BusModelsUpdated extends MapState {}
+
+final class DeleteStation extends MapState {}

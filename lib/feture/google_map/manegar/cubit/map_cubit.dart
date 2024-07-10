@@ -227,4 +227,14 @@ class MapCubit extends Cubit<MapState> {
 
     emit(MapSetLine());
   }
+
+  Future<void> deleteStation(StationModel station) async {
+    emit(DeleteStation());
+
+    await FirebaseFirestore.instance
+        .collection('station')
+        .doc(station.Id)
+        .delete();
+    emit(DeleteStation());
+  }
 }

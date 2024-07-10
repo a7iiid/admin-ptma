@@ -1,11 +1,9 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../Bus/presantation/widget/edit_bus.dart';
 import '../../google_map/manegar/cubit/map_cubit.dart';
 import '../../google_map/manegar/cubit/select_rout_cubit.dart';
-import '../../home/presentation/view/widget/map_route_bus.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 
 class StationBodyList extends StatelessWidget {
   StationBodyList({super.key});
@@ -63,12 +61,17 @@ class StationBodyList extends StatelessWidget {
                   return Column(mainAxisSize: MainAxisSize.min, children: [
                     ListTile(
                       title: Text(cubit.stationModel[index].name),
-                      onLongPress: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => EditBus()),
-                        );
-                      },
+                      onLongPress: () => AwesomeDialog(
+                        context: context,
+                        dialogType: DialogType.warning,
+                        animType: AnimType.bottomSlide,
+                        title: 'Delete',
+                        desc: 'Are You Sure',
+                        btnCancelOnPress: () {},
+                        btnOkOnPress: () async {
+                          await cubit.deleteStation(cubit.stationModel[index]);
+                        },
+                      )..show(),
                       onTap: () async {
                         cubit.selectStation = cubit.stationModel[index];
                         _showEditDialog(context);
