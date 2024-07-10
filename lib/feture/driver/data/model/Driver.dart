@@ -9,6 +9,9 @@ class Driver {
   String? id;
   GeoPoint? user_loc;
   int? salary;
+  String? phone;
+  String? photo_url;
+
   Driver(
       {this.bus_num,
       this.email,
@@ -16,17 +19,21 @@ class Driver {
       this.name,
       this.status,
       this.user_loc,
-      this.salary});
+      this.salary,
+      this.phone,
+      this.photo_url});
 
   factory Driver.fromJson(Map<String, dynamic> json) {
     return Driver(
       bus_num: json['bus_num'],
       email: json['email'],
       id: json['uid'],
-      name: json['name'],
+      name: json['display_name'],
       status: json['status'],
       user_loc: (json['user_loc']),
       salary: json['salary'],
+      phone: json['phone_number'],
+      photo_url: json['photo_url'],
     );
   }
 }

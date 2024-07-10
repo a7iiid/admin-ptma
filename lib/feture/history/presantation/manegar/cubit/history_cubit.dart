@@ -19,22 +19,6 @@ class HistoryCubit extends Cubit<HistoryState> {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  // Future<void> getHistory() async {
-  //   emit(HistoryLoading());
-  //   var result = await historyRepo.getHistory();
-  //   result.fold((filuer) {
-  //     emit(HistoryFailure(error: filuer));
-  //   }, (notes) {
-  //     if (notes == null) {
-  //       emit(HistoryNull());
-  //     }
-  //     history = notes;
-  //     emit(HistorySuccess(
-  //       history: history,
-  //     ));
-  //   });
-  // }
-
   Future<void> addPassengerToTrip(
       BusTrip qrCodeData, String passengerEmail) async {
     try {

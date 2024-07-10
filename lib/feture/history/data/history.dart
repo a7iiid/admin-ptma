@@ -6,6 +6,7 @@ class History {
   final String dateTrip;
   final int bus_num;
   DateTime? dateTime;
+  List<dynamic>? passengers;
 
   History({
     required this.tripNam,
@@ -13,16 +14,17 @@ class History {
     required this.price,
     required this.dateTrip,
     this.dateTime,
+    this.passengers,
   });
 
   factory History.fromJson(Map<String, dynamic> json) {
     Timestamp timestamp = json['time_date'] as Timestamp;
     return History(
-      tripNam: json['from'] + '-' + json['to'],
-      price: (json['salary'] as num).toDouble(),
-      dateTrip: timestamp.toDate().toString(), // Convert Timestamp to String
-      bus_num: json['bus_num'],
-      dateTime: timestamp.toDate(), // Store the DateTime as well
-    );
+        tripNam: json['from'] + '-' + json['to'],
+        price: (json['salary'] as num).toDouble(),
+        dateTrip: timestamp.toDate().toString(), // Convert Timestamp to String
+        bus_num: json['bus_num'],
+        dateTime: timestamp.toDate(), // Store the DateTime as well
+        passengers: json['Passengers']);
   }
 }

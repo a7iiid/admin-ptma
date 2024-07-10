@@ -1,9 +1,9 @@
 import 'package:admin/core/utils/localization/app_localaization.dart';
-import 'package:admin/feture/driver/data/model/DriverModel.dart';
+import 'package:admin/feture/driver/data/model/Driver.dart';
 import 'package:flutter/material.dart';
 
 class DriverCard extends StatelessWidget {
-  DriverModel driverModel;
+  Driver driverModel;
 
   DriverCard({Key? key, required this.driverModel}) : super(key: key);
 
@@ -22,7 +22,7 @@ class DriverCard extends StatelessWidget {
             children: [
               CircleAvatar(
                 radius: 40.0,
-                backgroundImage: NetworkImage(driverModel.photoUrl ?? ""),
+                backgroundImage: NetworkImage(driverModel.photo_url ?? ""),
                 backgroundColor: Colors.grey[200],
               ),
               SizedBox(width: 16.0),
@@ -32,7 +32,7 @@ class DriverCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      driverModel.driverName,
+                      driverModel.name!,
                       style: const TextStyle(
                         fontSize: 18.0,
                         fontWeight: FontWeight.bold,
@@ -40,14 +40,14 @@ class DriverCard extends StatelessWidget {
                     ),
                     SizedBox(height: 8.0),
                     Text(
-                      'Phone:'.tr(context) + ' ${driverModel.phoneNumber}',
+                      'Phone:'.tr(context) + ' ${driverModel.phone}',
                       style: const TextStyle(
                         fontSize: 16.0,
                       ),
                     ),
                     SizedBox(height: 8.0),
                     Text(
-                      'Bus Number:'.tr(context) + ' ${driverModel.busNum}',
+                      'Bus Number:'.tr(context) + ' ${driverModel.bus_num}',
                       style: const TextStyle(
                         fontSize: 16.0,
                       ),

@@ -8,7 +8,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:meta/meta.dart';
 import '../../../Bus/data/bus.dart';
 import '/feture/google_map/data/model/distance_model/distance_model.dart';
-import '/feture/google_map/manegar/cubit/driver_cubit.dart';
+import '../../../driver/data/manger/cubit/driver_cubit.dart';
 
 import '../../../../core/utils/apiKey.dart';
 import '../../data/model/bus_model.dart';
