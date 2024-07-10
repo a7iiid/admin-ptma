@@ -62,6 +62,9 @@ class MyApp extends StatelessWidget {
           BlocProvider(
             create: (context) => HistoryCubit(),
           ),
+          BlocProvider(
+            create: (context) => DriverCubit()..loadDriver(),
+          ),
         ],
         child: BlocBuilder<LoclaizationCubit, LoclaizationState>(
           builder: (context, state) {

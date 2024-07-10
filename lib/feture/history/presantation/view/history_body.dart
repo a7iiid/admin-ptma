@@ -16,24 +16,21 @@ class HistoryBody extends StatelessWidget {
       body: BlocConsumer<DriverCubit, DriverState>(
         listener: (context, state) {},
         builder: (context, state) {
+          log(state.toString());
           var cubit = DriverCubit.get(context);
 
-          if (state is DriverHistorySuccess) {
+          if (cubit.history.length > 0) {
             return CustomScrollView(
               slivers: [
                 SliverList.builder(
-                  itemCount: state.historyDriver.length,
+                  itemCount: cubit.history.length,
                   itemBuilder: (context, index) {
                     return CustomCard(
-                      history: state.historyDriver[index],
+                      history: cubit.history[index],
                     );
                   },
                 )
               ],
-            );
-          } else if (state is DriverFailure) {
-            return const Center(
-              child: CircularProgressIndicator(),
             );
           } else {
             return const Center(

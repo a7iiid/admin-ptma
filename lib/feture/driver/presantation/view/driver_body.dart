@@ -11,29 +11,26 @@ class DriverBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => DriverCubit()..loadDriver(),
-      child: BlocBuilder<DriverCubit, DriverState>(
-        builder: (context, state) {
-          return ListView.builder(
-            itemCount: DriverCubit.get(context).drivers.length,
-            itemBuilder: (context, index) {
-              return GestureDetector(
-                onTap: () async {
-                  DriverCubit.get(context).selecteDriver(index);
-                  await DriverCubit.get(context).loadTripsDriver();
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => TripHistoryPage()),
-                  );
-                },
-                child: DriverCard(
-                    driverModel: DriverCubit.get(context).drivers[index]),
-              );
-            },
-          );
-        },
-      ),
+    return BlocBuilder<DriverCubit, DriverState>(
+      builder: (context, state) {
+        return ListView.builder(
+          itemCount: DriverCubit.get(context).drivers.length,
+          itemBuilder: (context, index) {
+            return GestureDetector(
+              onTap: () async {
+                DriverCubit.get(context).selecteDriver(index);
+                await DriverCubit.get(context).loadTripsDriver();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => TripHistoryPage()),
+                );
+              },
+              child: DriverCard(
+                  driverModel: DriverCubit.get(context).drivers[index]),
+            );
+          },
+        );
+      },
     );
   }
 }

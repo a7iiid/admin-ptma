@@ -105,6 +105,31 @@ class CustomCard extends StatelessWidget {
                   ],
                 ),
               ),
+              Padding(
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 8.0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Passengers'.tr(context) /* From */,
+                      style: const TextStyle(
+                        letterSpacing: 0.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Expanded(
+                      child: Align(
+                        alignment: const AlignmentDirectional(1.0, 0.0),
+                        child: Text(history.passengers == null
+                            ? '0'
+                            : history.passengers!.length.toString()),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         ),
