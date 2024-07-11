@@ -16,139 +16,75 @@ class BodyHomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<Map<String, dynamic>> items = [
+      {
+        'route': Routes.kBus,
+        'image': Assets.imagesBusy,
+        'text': 'Bus',
+      },
+      {
+        'route': Routes.kStation,
+        'image': Assets.imagesStation,
+        'text': 'Station',
+      },
+      {
+        'route': Routes.kDriver,
+        'image': Assets.imagesDriver,
+        'text': 'Driver',
+      },
+      // Add more items here as needed
+    ];
+
     return Scaffold(
       body: Column(
         children: [
           Expanded(
-            child: GridView(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2, // Number of columns
-                ),
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      GoRouter.of(context).push(Routes.kBus);
-                    },
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Container(
-                          margin: EdgeInsets.all(8.0),
-                          decoration: BoxDecoration(
-                            color: Colors
-                                .white, // Set your desired background color here
-                            borderRadius: BorderRadius.circular(
-                                12.0), // Set border radius
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey
-                                    .withOpacity(0.5), // Set shadow color
-                                spreadRadius: 5,
-                                blurRadius: 7,
-                                offset:
-                                    Offset(0, 3), // changes position of shadow
-                              ),
-                            ],
-                          ),
-                          child: Center(
-                            child: SvgPicture.asset(
-                              Assets.imagesBusy,
-                              width:
-                                  100, // Adjust width and height as per your SVG's dimensions
-                              height: 100,
+            child: GridView.count(
+              crossAxisCount: 2, // Number of columns
+              children: List.generate(items.length, (index) {
+                var item = items[index];
+
+                return GestureDetector(
+                  onTap: () {
+                    GoRouter.of(context).push(item['route']);
+                  },
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Container(
+                        margin: EdgeInsets.all(8.0),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(12.0),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: 5,
+                              blurRadius: 7,
+                              offset: Offset(0, 3),
                             ),
+                          ],
+                        ),
+                        child: Center(
+                          child: SvgPicture.asset(
+                            item['image'],
+                            width: 100,
+                            height: 100,
                           ),
                         ),
-                        Text(
-                          'Bus'.tr(context),
-                          style: TextStyle(color: Colors.black, fontSize: 16.0),
+                      ),
+                      Text(
+                        item['text'],
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 16.0,
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      GoRouter.of(context).push(Routes.kStation);
-                    },
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Container(
-                          margin: EdgeInsets.all(8.0),
-                          decoration: BoxDecoration(
-                            color: Colors
-                                .white, // Set your desired background color here
-                            borderRadius: BorderRadius.circular(
-                                12.0), // Set border radius
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey
-                                    .withOpacity(0.5), // Set shadow color
-                                spreadRadius: 5,
-                                blurRadius: 7,
-                                offset:
-                                    Offset(0, 3), // changes position of shadow
-                              ),
-                            ],
-                          ),
-                          child: Center(
-                            child: SvgPicture.asset(
-                              Assets.imagesStation,
-                              width:
-                                  100, // Adjust width and height as per your SVG's dimensions
-                              height: 100,
-                            ),
-                          ),
-                        ),
-                        Text(
-                          'Station'.tr(context),
-                          style: TextStyle(color: Colors.black, fontSize: 16.0),
-                        ),
-                      ],
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      GoRouter.of(context).push(Routes.kDriver);
-                    },
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Container(
-                          margin: EdgeInsets.all(8.0),
-                          decoration: BoxDecoration(
-                            color: Colors
-                                .white, // Set your desired background color here
-                            borderRadius: BorderRadius.circular(
-                                12.0), // Set border radius
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey
-                                    .withOpacity(0.5), // Set shadow color
-                                spreadRadius: 5,
-                                blurRadius: 7,
-                                offset:
-                                    Offset(0, 3), // changes position of shadow
-                              ),
-                            ],
-                          ),
-                          child: Center(
-                            child: SvgPicture.asset(
-                              Assets.imagesDriver,
-                              width:
-                                  100, // Adjust width and height as per your SVG's dimensions
-                              height: 100,
-                            ),
-                          ),
-                        ),
-                        Text(
-                          'Driver'.tr(context),
-                          style: TextStyle(color: Colors.black, fontSize: 16.0),
-                        ),
-                      ],
-                    ),
-                  ),
-                ]),
+                );
+              }),
+            ),
           ),
         ],
       ),

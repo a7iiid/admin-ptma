@@ -66,7 +66,7 @@ class CustomeDrawer extends StatelessWidget {
                       onTap: () async {
                         await FirebaseAuth.instance.signOut().then((value) =>
                             GoRouter.of(context)
-                                .pushReplacement(Routes.kMainScreen));
+                                .pushReplacement(Routes.kSigninScreen));
                       },
                     ),
                     Spacer(),

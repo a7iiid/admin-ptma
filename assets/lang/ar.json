@@ -64,5 +64,6 @@
     "Salary": "الراتب",
     "Please enter a salary": "من فضلك ادخل الراتب",
     "Failed to add driver": "فشل في اضافة السائق",
-    "Not have trip":"لم يقم باي رحلة"
+    "Not have trip":"لم يقم باي رحلة",
+    "Login Details":"تسجيل الدخول"
 }
