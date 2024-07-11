@@ -66,4 +66,26 @@ class DriverCubit extends Cubit<DriverState> {
     selectDriver = drivers[index];
     emit(SelecteDriver());
   }
+
+//add new driver
+  Future<void> addDriver(Driver newDriver) async {
+    emit(AddDriver());
+    try {
+      var doc = await FirebaseFirestore.instance.collection('Users').add({});
+      await FirebaseFirestore.instance.collection('Users').doc(doc.id).set({
+        'display_name': newDriver.name,
+        'email': newDriver.email,
+        'phone_number': newDriver.phone,
+        'bus_num': newDriver.bus_num,
+        'salary': newDriver.salary,
+        'photo_url':
+            "https://firebasestorage.googleapis.com/v0/b/ptma-9c13f.appspot.com/o/cms_uploads%2FUsers%2F1718225499895000%2Fistockphoto-1316420668-612x612.jpg?alt=media&token=1192bb4d-b7de-41d9-a982-824becc7a452",
+        'password': '12345678',
+        'status': true, // Assuming status is active when added
+      });
+      emit(AddDriverSuccess());
+    } catch (e) {
+      emit(AddDriverFailure());
+    }
+  }
 }

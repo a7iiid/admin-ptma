@@ -19,6 +19,12 @@ class DriverFailure extends DriverState {
 
 class SelecteDriver extends DriverState {}
 
+class AddDriverSuccess extends DriverState {}
+
+class AddDriver extends DriverState {}
+
+class AddDriverFailure extends DriverState {}
+
 class DriverHistoryLoading extends DriverState {}
 
 class DriverHistorySuccess extends DriverState {

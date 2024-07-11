@@ -1,112 +1,163 @@
-import 'dart:io';
-
+import 'package:admin/core/utils/localization/app_localaization.dart';
+import 'package:admin/feture/driver/data/manger/cubit/driver_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import '/../core/utils/Style.dart';
-import '/../core/utils/images.dart';
-import '/../core/utils/localization/app_localaization.dart';
-import '/../feture/autth/manger/cubit/auth_cubit.dart';
-import '../../../../core/widget/custom_button.dart';
-import '../../../../core/widget/custom_teaxt_form_field.dart';
-import '../../../autth/presentation/widget/set_user_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import '../../data/model/Driver.dart';
 
 class AddDriverBody extends StatefulWidget {
-  const AddDriverBody({super.key});
+  const AddDriverBody({Key? key}) : super(key: key);
 
   @override
-  State<AddDriverBody> createState() => _AddDriverBodyState();
+  _AddDriverBodyState createState() => _AddDriverBodyState();
 }
 
 class _AddDriverBodyState extends State<AddDriverBody> {
-  @override
-  GlobalKey<FormState> key = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
 
-  final emailControlar = TextEditingController();
-
-  final pasControlar = TextEditingController();
-  final nameControlar = TextEditingController();
+  TextEditingController _nameController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _phoneController = TextEditingController();
+  TextEditingController _busNumController = TextEditingController();
+  TextEditingController _salaryController = TextEditingController();
+  TextEditingController _photoUrlController = TextEditingController();
 
   @override
   void dispose() {
-    emailControlar.dispose();
-    pasControlar.dispose();
+    _nameController.dispose();
+    _emailController.dispose();
+    _phoneController.dispose();
+    _busNumController.dispose();
+    _salaryController.dispose();
+    _photoUrlController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: key,
-      child: SafeArea(
-          child: BlocConsumer<AuthAppCubit, AuthState>(
-              listener: (context, state) {},
-              builder: (context, state) {
-                return SingleChildScrollView(
-                  padding: const EdgeInsets.all(30),
-                  child: Column(
-                    children: [
-                      const SizedBox(
-                        height: 30,
-                      ),
-                      Row(
-                        children: [
-                          Text('Add Driver'.tr(context),
-                              style: AppStyle.bold28blak),
-                          Spacer()
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 33,
-                      ),
-                      SetUserImage(),
-                      CustomTeaxtFormField(
-                        controlar: nameControlar,
-                        validatText: 'pleas Enter name'.tr(context),
-                        hintText: 'Full name'.tr(context),
-                        labelText: 'Full name'.tr(context),
-                      ),
-                      CustomTeaxtFormField(
-                        controlar: emailControlar,
-                        validatText: 'pleas Enter email'.tr(context),
-                        hintText: 'Email'.tr(context),
-                        labelText: 'Email'.tr(context),
-                      ),
-                      CustomTeaxtFormField(
-                        controlar: pasControlar,
-                        validatText: "pleas Enter Passwored".tr(context),
-                        hintText: 'Password'.tr(context),
-                        labelText: 'Password'.tr(context),
-                      ),
-                      const SizedBox(
-                        height: 30,
-                      ),
-                      CustomButton(
-                        title: 'Sign up'.tr(context),
-                        backgraondColor: const Color(0xFF2743FB),
-                        textStyle: AppStyle.reguler20white,
-                        iconcolor: Colors.white,
-                        function: () {
-                          if (key.currentState!.validate()) {
-                            AuthAppCubit.get(context).creatAcaunte(
-                                emailControlar.text,
-                                pasControlar.text,
-                                nameControlar.text,
-                                context);
-                          }
-                        },
-                      ),
-                      const SizedBox(
-                        height: 60,
-                      ),
-                      Align(
-                          alignment: Alignment.center,
-                          child: Text('or using social '.tr(context)))
-                    ],
-                  ),
-                );
-              })),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          ('Add Driver'.tr(context)),
+        ),
+        centerTitle: true,
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16.0),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              TextFormField(
+                controller: _nameController,
+                decoration: InputDecoration(
+                  labelText: ('Name'.tr(context)),
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return ('Please enter a name'.tr(context));
+                  }
+                  return null;
+                },
+              ),
+              SizedBox(height: 16.0),
+              TextFormField(
+                controller: _emailController,
+                decoration: InputDecoration(
+                  labelText: ('Email'.tr(context)),
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return ('Please enter an email'.tr(context));
+                  }
+                  return null;
+                },
+              ),
+              SizedBox(height: 16.0),
+              TextFormField(
+                controller: _phoneController,
+                decoration: InputDecoration(
+                  labelText: 'Phone'.tr(context),
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return ('Please enter a phone number'.tr(context));
+                  }
+                  return null;
+                },
+              ),
+              SizedBox(height: 16.0),
+              TextFormField(
+                controller: _busNumController,
+                decoration: InputDecoration(
+                  labelText: ('Bus Number'.tr(context)),
+                ),
+                keyboardType: TextInputType.number,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return ('Please enter a bus number'.tr(context));
+                  }
+                  return null;
+                },
+              ),
+              SizedBox(height: 16.0),
+              TextFormField(
+                controller: _salaryController,
+                decoration: InputDecoration(
+                  labelText: ('Salary'.tr(context)),
+                ),
+                keyboardType: TextInputType.number,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return ('Please enter a salary'.tr(context));
+                  }
+                  return null;
+                },
+              ),
+              SizedBox(height: 16.0),
+              SizedBox(height: 30.0),
+              ElevatedButton(
+                onPressed: () async {
+                  if (_formKey.currentState!.validate()) {
+                    // Create a Driver object
+                    Driver newDriver = Driver(
+                      name: _nameController.text,
+                      email: _emailController.text,
+                      phone: _phoneController.text,
+                      bus_num: int.tryParse(_busNumController.text),
+                      salary: int.tryParse(_salaryController.text),
+                      photo_url: _photoUrlController.text,
+                    );
+
+                    // Add the new driver to Firestore
+                    await DriverCubit.get(context)
+                        .addDriver(newDriver)
+                        .then((value) {
+                      // Show success message or navigate to another screen
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                            content:
+                                Text('Driver added successfully'.tr(context))),
+                      );
+                      Navigator.of(context)
+                          .pop(); // Navigate back to previous screen
+                    }).catchError((error) {
+                      // Show error message
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                            content: Text('Failed to add driver'.tr(context))),
+                      );
+                    });
+                  }
+                },
+                child: Text(
+                  ('Add Driver'.tr(context)),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

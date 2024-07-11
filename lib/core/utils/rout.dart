@@ -1,6 +1,7 @@
 import 'package:admin/core/utils/splash/splash.dart';
 import 'package:admin/feture/Bus/bus_view.dart';
 import 'package:admin/feture/admin/admin_view.dart';
+import 'package:admin/feture/driver/presantation/view/add_driver.dart';
 import 'package:admin/feture/driver/presantation/view/drivers_view.dart';
 import 'package:admin/feture/stations/station_view.dart';
 import 'package:go_router/go_router.dart';
@@ -42,7 +43,7 @@ abstract class Routes {
     GoRoute(
       path: kSignUpScreen,
       builder: (context, state) {
-        return const AddDriverBody();
+        return const AddDriver();
       },
     ),
     GoRoute(

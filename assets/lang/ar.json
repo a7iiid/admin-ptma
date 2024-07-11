@@ -51,8 +51,18 @@
     "Is Active": "نشط",
     "Phone:": "الهاتف:",
     "Bus Number:": "رقم الباص:",
-    "Trip History":"سجل الرحل",
-    "Passengers":"عدد الركاب",
-    "Trip Date":"تاريخ الرحلة",
-    "Add Driver":"اضف سائق جديد"
+    "Trip History": "سجل الرحل",
+    "Passengers": "عدد الركاب",
+    "Trip Date": "تاريخ الرحلة",
+    "Add Driver": "اضف سائق جديد",
+    "Name": "الاسم",
+    "Please enter a name": "من فضلك ادخل الاسم",
+    "Please enter an email": "من فضلك ادخل البريد الالكتروني",
+    "Phone": "الهاتف",
+    "Please enter a phone number": "من فضلك ادخل رقم الهاتف",
+    "Please enter a bus number": "من فضلك ادخل رقم الباص",
+    "Salary": "الراتب",
+    "Please enter a salary": "من فضلك ادخل الراتب",
+    "Failed to add driver": "فشل في اضافة السائق",
+    "Not have trip":"لم يقم باي رحلة"
 }

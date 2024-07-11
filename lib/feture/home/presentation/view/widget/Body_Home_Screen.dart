@@ -148,47 +148,6 @@ class BodyHomeScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      GoRouter.of(context).push(Routes.kAdmin);
-                    },
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Container(
-                          margin: EdgeInsets.all(8.0),
-                          decoration: BoxDecoration(
-                            color: Colors
-                                .white, // Set your desired background color here
-                            borderRadius: BorderRadius.circular(
-                                12.0), // Set border radius
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey
-                                    .withOpacity(0.5), // Set shadow color
-                                spreadRadius: 5,
-                                blurRadius: 7,
-                                offset:
-                                    Offset(0, 3), // changes position of shadow
-                              ),
-                            ],
-                          ),
-                          child: Center(
-                            child: SvgPicture.asset(
-                              Assets.imagesADMIN,
-                              width:
-                                  100, // Adjust width and height as per your SVG's dimensions
-                              height: 100,
-                            ),
-                          ),
-                        ),
-                        Text(
-                          'Admins'.tr(context),
-                          style: TextStyle(color: Colors.black, fontSize: 16.0),
-                        ),
-                      ],
-                    ),
-                  ),
                 ]),
           ),
         ],

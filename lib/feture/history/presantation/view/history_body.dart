@@ -1,5 +1,7 @@
 import 'dart:developer';
 
+import 'package:admin/core/utils/Style.dart';
+import 'package:admin/core/utils/localization/app_localaization.dart';
 import 'package:admin/feture/driver/data/manger/cubit/driver_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -33,8 +35,11 @@ class HistoryBody extends StatelessWidget {
               ],
             );
           } else {
-            return const Center(
-              child: CircularProgressIndicator(),
+            return Center(
+              child: Text(
+                "Not have trip".tr(context),
+                style: AppStyle.bold28blak,
+              ),
             );
           }
         },

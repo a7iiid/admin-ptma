@@ -56,7 +56,19 @@
 "Bus Number:":"Bus Number:",
 "Trip History":"Trip History",
 "Trip Date":"Trip Date",
-    "Add Driver":"Add Driver"
+    "Add Driver":"Add Driver",
+
+    "Name":"Name",
+    "Please enter a name":"Please enter a name",
+    "Please enter an email":"Please enter an email",
+    "Phone":"Phone",
+    "Please enter a phone number":"Please enter a phone number",
+    "Please enter a bus number":"Please enter a bus number",
+    "Salary":"Salary",
+    "Please enter a salary":"Please enter a salary",
+    "Failed to add driver":"Failed to add driver",
+    "Not have trip":"Not have trip"
+
 
 
 
