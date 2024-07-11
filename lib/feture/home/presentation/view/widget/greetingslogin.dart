@@ -15,7 +15,7 @@ class Greetingslogin extends StatelessWidget {
       child: Row(
         children: [
           const SizedBox(
-            width: 20,
+            width: 30,
           ),
           Text(
             DateTime.now().hour < 12
@@ -23,17 +23,17 @@ class Greetingslogin extends StatelessWidget {
                 : "${"Good evening".tr(context)} ${FirebaseAuth.instance.currentUser!.displayName ?? ''}",
             style: AppStyle.normal24,
           ),
-          if (DateTime.now().hour < 12)
-            const Icon(
-              Icons.sunny,
-              color: Colors.yellow,
-            )
-          else
-            const Icon(
-              Icons.nightlight_round_outlined,
-              color: Colors.white,
-              size: 25,
-            ),
+          // if (DateTime.now().hour < 12)
+          //   const Icon(
+          //     Icons.sunny,
+          //     color: Colors.yellow,
+          //   )
+          // else
+          //   const Icon(
+          //     Icons.nightlight_round_outlined,
+          //     color: Colors.white,
+          //     size: 25,
+          //   ),
         ],
       ),
     );

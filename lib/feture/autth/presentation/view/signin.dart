@@ -128,15 +128,12 @@ class _SignInScreenState extends State<SignInScreen> {
                           }
                         },
                       ),
-                      const SizedBox(
-                        height: 60,
-                      ),
                     ],
                   ),
                 ),
                 Positioned(
                     bottom: -MediaQuery.sizeOf(context).height *
-                        .27, // Position the CustomPaint at the bottom
+                        .333, // Position the CustomPaint at the bottom
                     left: 0,
                     right: 0,
                     child: CustomPaint(

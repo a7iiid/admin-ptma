@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../../core/widget/user_image.dart';
 import '/core/utils/drawer/drawer.dart';
 import '/feture/google_map/manegar/cubit/select_rout_cubit.dart';
 
@@ -43,9 +44,9 @@ class _HomeScreenState extends State<HomeScreen> {
             Stack(
               clipBehavior: Clip.none,
               children: [
-                const HeadHomePage(),
+                const HeadHomePageShape(),
                 Positioned(
-                  top: MediaQuery.sizeOf(context).height * .05,
+                  top: MediaQuery.sizeOf(context).height * .08,
                   child: const DrawerBottom(),
                 ),
                 Positioned(
@@ -53,6 +54,19 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: const Padding(
                         padding: EdgeInsets.symmetric(horizontal: 15.0),
                         child: Greetingslogin())),
+                Positioned(
+                  top: MediaQuery.sizeOf(context).height * .02,
+                  child: SizedBox(
+                      height: 130,
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            width: MediaQuery.sizeOf(context).width * .68,
+                          ),
+                          const UserImage(),
+                        ],
+                      )),
+                )
               ],
             ),
             const SizedBox(

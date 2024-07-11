@@ -21,8 +21,10 @@ class bodySelecteRout extends StatelessWidget {
             child: ListView.builder(
                 itemCount: cubit.busModel.length,
                 itemBuilder: (context, index) {
-                  return Column(mainAxisSize: MainAxisSize.min, children: [
-                    ListTile(
+                  return Card(
+                    color: Colors.lightBlue[50],
+                    margin: EdgeInsets.symmetric(vertical: 8.0),
+                    child: ListTile(
                       title: Text(cubit.busModel[index].busname),
                       trailing: Text(cubit.busModel[index].busnumber),
                       onLongPress: () {
@@ -50,7 +52,7 @@ class bodySelecteRout extends StatelessWidget {
                         }
                       },
                     ),
-                  ]);
+                  );
                 }));
       },
     );

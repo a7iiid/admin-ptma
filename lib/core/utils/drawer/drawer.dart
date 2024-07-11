@@ -43,7 +43,7 @@ class CustomeDrawer extends StatelessWidget {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     SizedBox(
-                      height: MediaQuery.sizeOf(context).height * .1,
+                      height: MediaQuery.sizeOf(context).height * .2,
                     ),
                     const UserImage(),
                     ListTile(

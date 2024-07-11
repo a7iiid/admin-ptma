@@ -43,7 +43,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
           child: Container(
             child: Stack(
               children: [
-                const HeadHomePage(),
+                const HeadHomePageShape(),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: Column(

@@ -34,6 +34,7 @@ class _SelectRoutsState extends State<SelectRouts> {
 
     return Scaffold(
         floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.lightBlue[50],
           onPressed: () {
             Navigator.push(
               context,
@@ -49,7 +50,7 @@ class _SelectRoutsState extends State<SelectRouts> {
             Stack(
               clipBehavior: Clip.none,
               children: [
-                const HeadHomePage(),
+                const HeadHomePageShape(),
                 Positioned(
                   top: MediaQuery.sizeOf(context).height * .05,
                   child: const DrawerBottom(),

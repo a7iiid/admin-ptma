@@ -10,6 +10,7 @@ import '../../../../../core/utils/rout.dart';
 import '/feture/google_map/manegar/cubit/map_cubit.dart';
 import '/feture/google_map/manegar/cubit/select_rout_cubit.dart';
 import '/feture/home/presentation/view/widget/map_route_bus.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class BodyHomeScreen extends StatelessWidget {
   const BodyHomeScreen({super.key});
@@ -32,21 +33,21 @@ class BodyHomeScreen extends StatelessWidget {
         'image': Assets.imagesDriver,
         'text': 'Driver',
       },
-      // Add more items here as needed
     ];
 
     return Scaffold(
       body: Column(
         children: [
           Expanded(
-            child: GridView.count(
-              crossAxisCount: 2, // Number of columns
-              children: List.generate(items.length, (index) {
-                var item = items[index];
-
+            child: MasonryGridView.builder(
+              mainAxisSpacing: 8,
+              crossAxisSpacing: 5,
+              itemCount:
+                  items.length, // Set the itemCount to the length of items
+              itemBuilder: (BuildContext context, int index) {
                 return GestureDetector(
                   onTap: () {
-                    GoRouter.of(context).push(item['route']);
+                    GoRouter.of(context).push(items[index]['route']);
                   },
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
@@ -67,14 +68,14 @@ class BodyHomeScreen extends StatelessWidget {
                         ),
                         child: Center(
                           child: SvgPicture.asset(
-                            item['image'],
+                            items[index]['image'],
                             width: 100,
                             height: 100,
                           ),
                         ),
                       ),
                       Text(
-                        item['text'],
+                        items[index]['text'],
                         style: const TextStyle(
                           color: Colors.black,
                           fontSize: 16.0,
@@ -83,7 +84,10 @@ class BodyHomeScreen extends StatelessWidget {
                     ],
                   ),
                 );
-              }),
+              },
+              gridDelegate:
+                  const SliverSimpleGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2),
             ),
           ),
         ],

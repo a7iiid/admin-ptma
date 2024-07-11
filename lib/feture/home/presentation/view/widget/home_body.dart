@@ -24,7 +24,7 @@ class HomeBody extends StatelessWidget {
         const Stack(
           clipBehavior: Clip.none,
           children: [
-            HeadHomePage(),
+            HeadHomePageShape(),
             DrawerBottom(),
           ],
         ),

@@ -48,7 +48,7 @@ class _BodyStationViewState extends State<BodyStationView> {
             Stack(
               clipBehavior: Clip.none,
               children: [
-                const HeadHomePage(),
+                const HeadHomePageShape(),
                 Positioned(
                   top: MediaQuery.sizeOf(context).height * .05,
                   child: const DrawerBottom(),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import '/core/utils/shapes/home_screen.dart';
 
-class HeadHomePage extends StatelessWidget {
-  const HeadHomePage({
+class HeadHomePageShape extends StatelessWidget {
+  const HeadHomePageShape({
     super.key,
   });
 
@@ -11,7 +11,7 @@ class HeadHomePage extends StatelessWidget {
     return CustomPaint(
       size: Size(MediaQuery.sizeOf(context).width,
           (MediaQuery.sizeOf(context).width * 0.7433155080213903).toDouble()),
-      painter: RPSCustomPainter(),
+      painter: HomePageShape(),
     );
   }
 }

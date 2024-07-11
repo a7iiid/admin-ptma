@@ -12,7 +12,7 @@ class ProfileBody extends StatelessWidget {
     return Stack(
       clipBehavior: Clip.none,
       children: [
-        const HeadHomePage(),
+        const HeadHomePageShape(),
         Positioned(
             left: MediaQuery.sizeOf(context).width * .347,
             bottom: -MediaQuery.sizeOf(context).height * .12,
