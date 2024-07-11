@@ -50,86 +50,59 @@ class _SignInScreenState extends State<SignInScreen> {
     return Form(
       key: key,
       child: Scaffold(
-        body: SafeArea(
-          child: form(
-            emailControlar: emailControlar,
-            pasControlar: pasControlar,
-            formKey: key,
-          ),
-        ),
+        body: SafeArea(child: BlocBuilder<AuthAppCubit, AuthState>(
+          builder: (context, state) {
+            return SingleChildScrollView(
+              padding: const EdgeInsets.all(30),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SvgPicture.asset(
+                    Assets.imagesLogin,
+                  ),
+                  Text("Login".tr(context), style: AppStyle.bold28blak),
+                  const SizedBox(
+                    height: 33,
+                  ),
+                  CustomTeaxtFormField(
+                    controlar: emailControlar,
+                    validatText: 'pleas Enter email'.tr(context),
+                    hintText: 'Email'.tr(context),
+                    labelText: 'Email'.tr(context),
+                  ),
+                  CustomTeaxtFormField(
+                    controlar: pasControlar,
+                    validatText: "pleas Enter Passwored".tr(context),
+                    hintText: 'Password'.tr(context),
+                    labelText: 'Password'.tr(context),
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  CustomButton(
+                    title: 'Login'.tr(context),
+                    backgraondColor: const Color(0xFF2743FB),
+                    textStyle: AppStyle.reguler20white,
+                    iconcolor: Colors.white,
+                    function: () {
+                      if (key.currentState!.validate()) {
+                        AuthAppCubit.get(context).login(
+                            emailControlar.text, pasControlar.text, context);
+                      }
+                    },
+                  ),
+                  const SizedBox(
+                    height: 60,
+                  ),
+                  Align(
+                      alignment: Alignment.center,
+                      child: Text('or using social '.tr(context)))
+                ],
+              ),
+            );
+          },
+        )),
       ),
-    );
-  }
-}
-
-class form extends StatelessWidget {
-  form(
-      {super.key,
-      this.emailControlar,
-      this.pasControlar,
-      required this.formKey});
-
-  @override
-  final emailControlar;
-
-  final pasControlar;
-  GlobalKey<FormState> formKey;
-
-  bool isEmail = false;
-  bool isPass = false;
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<AuthAppCubit, AuthState>(
-      builder: (context, state) {
-        return SingleChildScrollView(
-          padding: const EdgeInsets.all(30),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SvgPicture.asset(
-                Assets.imagesLogin,
-              ),
-              Text("Login".tr(context), style: AppStyle.bold28blak),
-              const SizedBox(
-                height: 33,
-              ),
-              CustomTeaxtFormField(
-                controlar: emailControlar,
-                validatText: 'pleas Enter email'.tr(context),
-                hintText: 'Email'.tr(context),
-                labelText: 'Email'.tr(context),
-              ),
-              CustomTeaxtFormField(
-                controlar: pasControlar,
-                validatText: "pleas Enter Passwored".tr(context),
-                hintText: 'Password'.tr(context),
-                labelText: 'Password'.tr(context),
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              CustomButton(
-                title: 'Login'.tr(context),
-                backgraondColor: const Color(0xFF2743FB),
-                textStyle: AppStyle.reguler20white,
-                iconcolor: Colors.white,
-                function: () {
-                  if (formKey.currentState!.validate()) {
-                    AuthAppCubit.get(context)
-                        .login(emailControlar.text, pasControlar.text, context);
-                  }
-                },
-              ),
-              const SizedBox(
-                height: 60,
-              ),
-              Align(
-                  alignment: Alignment.center,
-                  child: Text('or using social '.tr(context)))
-            ],
-          ),
-        );
-      },
     );
   }
 }

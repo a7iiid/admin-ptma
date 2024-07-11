@@ -5,7 +5,7 @@ import 'package:admin/feture/driver/presantation/view/drivers_view.dart';
 import 'package:admin/feture/stations/station_view.dart';
 import 'package:go_router/go_router.dart';
 import '/../feture/autth/presentation/view/signin.dart';
-import '/../feture/autth/presentation/view/signup.dart';
+import '../../feture/driver/presantation/widget/add_driver_body.dart';
 import '/../feture/home/presentation/view/home_page.dart';
 import '/../feture/settings/view/settings.dart';
 import '/../feture/user_profile/presntation/view/widget/edit_profile_page.dart';
@@ -42,7 +42,7 @@ abstract class Routes {
     GoRoute(
       path: kSignUpScreen,
       builder: (context, state) {
-        return const SignUpScreen();
+        return const AddDriverBody();
       },
     ),
     GoRoute(

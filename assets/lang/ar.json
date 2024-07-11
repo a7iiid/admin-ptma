@@ -52,5 +52,7 @@
     "Phone:": "الهاتف:",
     "Bus Number:": "رقم الباص:",
     "Trip History":"سجل الرحل",
-    "Passengers":"عدد الركاب"
+    "Passengers":"عدد الركاب",
+    "Trip Date":"تاريخ الرحلة",
+    "Add Driver":"اضف سائق جديد"
 }

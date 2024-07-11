@@ -65,7 +65,7 @@ class AddBus extends StatelessWidget {
           ElevatedButton(
             onPressed: () async {
               Bus bus = Bus(
-                  busLocation: GeoPoint(32, 35),
+                  busLocation: GeoPoint(32.4, 35.1),
                   busname: nameBus.text,
                   busnumber: numBus.text,
                   endStation: distnationStation!.stationLocation,

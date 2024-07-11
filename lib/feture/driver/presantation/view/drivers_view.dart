@@ -3,6 +3,8 @@ import 'package:admin/feture/driver/presantation/view/driver_body.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'add_driver.dart';
+
 class DriversView extends StatelessWidget {
   const DriversView({super.key});
 
@@ -16,6 +18,15 @@ class DriversView extends StatelessWidget {
         centerTitle: true,
       ),
       body: DriverBody(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => AddDriver()),
+          );
+        },
+        child: Icon(Icons.add),
+      ),
     );
   }
 }
