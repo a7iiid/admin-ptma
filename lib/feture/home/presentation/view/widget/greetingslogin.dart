@@ -11,29 +11,45 @@ class Greetingslogin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 40),
-      child: Row(
+      padding: const EdgeInsets.only(top: 20),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
-          const SizedBox(
-            width: 30,
+          Row(
+            children: [
+              const SizedBox(
+                width: 30,
+              ),
+              Text(
+                DateTime.now().hour < 12
+                    ? " ${"Good morning".tr(context)} "
+                    : "${"Good evening".tr(context)} ",
+                style: AppStyle.normal40,
+              ),
+              if (DateTime.now().hour < 12)
+                const Icon(
+                  Icons.sunny,
+                  color: Colors.yellow,
+                )
+              else
+                const Icon(
+                  Icons.nightlight_round_outlined,
+                  color: Colors.white,
+                  size: 25,
+                ),
+            ],
           ),
-          Text(
-            DateTime.now().hour < 12
-                ? " ${"Good morning".tr(context)} ${FirebaseAuth.instance.currentUser!.displayName ?? ''}"
-                : "${"Good evening".tr(context)} ${FirebaseAuth.instance.currentUser!.displayName ?? ''}",
-            style: AppStyle.normal24,
-          ),
-          // if (DateTime.now().hour < 12)
-          //   const Icon(
-          //     Icons.sunny,
-          //     color: Colors.yellow,
-          //   )
-          // else
-          //   const Icon(
-          //     Icons.nightlight_round_outlined,
-          //     color: Colors.white,
-          //     size: 25,
-          //   ),
+          Row(
+            children: [
+              SizedBox(
+                width: MediaQuery.sizeOf(context).width * .3,
+              ),
+              Text(
+                FirebaseAuth.instance.currentUser!.displayName.toString(),
+                style: AppStyle.normal40,
+              ),
+            ],
+          )
         ],
       ),
     );

@@ -36,46 +36,44 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     var cubit = SelectRoutCubit.get(context);
 
-    return Scaffold(
-        drawer: CustomeDrawer(),
-        body: SafeArea(
-            child: Column(
+    return SafeArea(
+        child: Column(
+      children: [
+        Stack(
+          clipBehavior: Clip.none,
           children: [
-            Stack(
-              clipBehavior: Clip.none,
-              children: [
-                const HeadHomePageShape(),
-                Positioned(
-                  top: MediaQuery.sizeOf(context).height * .08,
-                  child: const DrawerBottom(),
-                ),
-                Positioned(
-                    top: MediaQuery.sizeOf(context).height * .1,
-                    child: const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 15.0),
-                        child: Greetingslogin())),
-                Positioned(
-                  top: MediaQuery.sizeOf(context).height * .02,
-                  child: SizedBox(
-                      height: 130,
-                      child: Row(
-                        children: [
-                          SizedBox(
-                            width: MediaQuery.sizeOf(context).width * .68,
-                          ),
-                          const UserImage(),
-                        ],
-                      )),
-                )
-              ],
+            const HeadHomePageShape(),
+            Positioned(
+              top: MediaQuery.sizeOf(context).height * .08,
+              child: const DrawerBottom(),
             ),
-            const SizedBox(
-              height: 20,
-            ),
-            const Expanded(
-              child: BodyHomeScreen(),
-            ),
+            Positioned(
+                top: MediaQuery.sizeOf(context).height * .13,
+                child: const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 15.0),
+                    child: Greetingslogin())),
+            Positioned(
+              top: MediaQuery.sizeOf(context).height * .02,
+              child: SizedBox(
+                  height: 130,
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: MediaQuery.sizeOf(context).width * .68,
+                      ),
+                      const UserImage(),
+                    ],
+                  )),
+            )
           ],
-        )));
+        ),
+        const SizedBox(
+          height: 20,
+        ),
+        const Expanded(
+          child: BodyHomeScreen(),
+        ),
+      ],
+    ));
   }
 }

@@ -32,7 +32,18 @@ class _HomePageState extends State<HomePage> {
       child: BlocBuilder<AppCubit, AppState>(
         builder: (context, state) {
           return Scaffold(
-            body: HomeScreen(),
+            body: Container(
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Color(0xff667eea),
+                      Color(0xff64b6ff),
+                    ],
+                  ),
+                ),
+                child: HomeScreen()),
             drawer: const CustomeDrawer(),
           );
         },

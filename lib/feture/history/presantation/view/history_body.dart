@@ -14,36 +14,34 @@ class HistoryBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: BlocConsumer<DriverCubit, DriverState>(
-        listener: (context, state) {},
-        builder: (context, state) {
-          log(state.toString());
-          var cubit = DriverCubit.get(context);
+    return BlocConsumer<DriverCubit, DriverState>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        log(state.toString());
+        var cubit = DriverCubit.get(context);
 
-          if (cubit.history.length > 0) {
-            return CustomScrollView(
-              slivers: [
-                SliverList.builder(
-                  itemCount: cubit.history.length,
-                  itemBuilder: (context, index) {
-                    return CustomCard(
-                      history: cubit.history[index],
-                    );
-                  },
-                )
-              ],
-            );
-          } else {
-            return Center(
-              child: Text(
-                "Not have trip".tr(context),
-                style: AppStyle.bold28blak,
-              ),
-            );
-          }
-        },
-      ),
+        if (cubit.history.length > 0) {
+          return CustomScrollView(
+            slivers: [
+              SliverList.builder(
+                itemCount: cubit.history.length,
+                itemBuilder: (context, index) {
+                  return CustomCard(
+                    history: cubit.history[index],
+                  );
+                },
+              )
+            ],
+          );
+        } else {
+          return Center(
+            child: Text(
+              "Not have trip".tr(context),
+              style: AppStyle.bold28blak,
+            ),
+          );
+        }
+      },
     );
   }
 }

@@ -12,13 +12,35 @@ class DriversView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Driver'.tr(context),
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Color(0xff667eea),
+                Color(0xff64b6ff),
+              ],
+            ),
+          ),
         ),
+        title: Text('Driver'.tr(context)), // Replace with your title
         centerTitle: true,
       ),
-      body: DriverBody(),
+      body: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Color(0xff667eea),
+                Color(0xff64b6ff),
+              ],
+            ),
+          ),
+          child: DriverBody()),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.white,
         onPressed: () {
           Navigator.push(
             context,

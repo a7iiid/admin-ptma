@@ -65,6 +65,13 @@ class AppStyle {
     fontWeight: FontWeight.w400,
     height: 0,
   );
+  static TextStyle normal40 = const TextStyle(
+    color: Colors.white,
+    fontSize: 40,
+    fontFamily: 'Montserrat',
+    fontWeight: FontWeight.w400,
+    height: 0,
+  );
   static TextStyle regler16 = TextStyle(
     color: Colors.black.withOpacity(0.699999988079071),
     fontSize: 16,

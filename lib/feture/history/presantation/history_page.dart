@@ -12,8 +12,32 @@ class TripHistoryPage extends StatelessWidget {
     return SafeArea(
         child: Scaffold(
             appBar: AppBar(
+              flexibleSpace: Container(
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Color(0xff667eea),
+                      Color(0xff64b6ff),
+                    ],
+                  ),
+                ),
+              ),
               title: Text('Trip History'.tr(context)),
+              centerTitle: true,
             ),
-            body: HistoryBody()));
+            body: Container(
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Color(0xff667eea),
+                      Color(0xff64b6ff),
+                    ],
+                  ),
+                ),
+                child: HistoryBody())));
   }
 }
