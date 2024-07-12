@@ -147,7 +147,7 @@ class AddBus extends StatelessWidget {
                   await SelectRoutCubit.get(context).addBus(bus);
                   Navigator.pop(context); // Close the edit page after saving
                 },
-                child: Text('Save'),
+                child: Text('Save'.tr(context), style: AppStyle.normal25),
               ),
             ],
           ),

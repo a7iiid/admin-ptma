@@ -22,17 +22,17 @@ class BodyHomeScreen extends StatelessWidget {
       {
         'route': Routes.kBus,
         'image': Assets.imagesBusy,
-        'text': 'Bus',
+        'text': 'Bus'.tr(context),
       },
       {
         'route': Routes.kStation,
         'image': Assets.imagesStation,
-        'text': 'Station',
+        'text': 'Stations'.tr(context),
       },
       {
         'route': Routes.kDriver,
         'image': Assets.imagesDriver,
-        'text': 'Driver',
+        'text': 'Driver'.tr(context),
       },
     ];
 

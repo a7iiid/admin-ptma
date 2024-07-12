@@ -55,7 +55,11 @@ class _AddDriverBodyState extends State<AddDriverBody> {
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
+              SizedBox(
+                height: 20,
+              ),
               TextFormField(
                 style: TextStyle(color: Colors.lightBlue[50]),
                 controller: _nameController,
@@ -152,9 +156,8 @@ class _AddDriverBodyState extends State<AddDriverBody> {
                     });
                   }
                 },
-                child: Text(
-                  ('Add Driver'.tr(context)),
-                ),
+                child:
+                    Text(('Add Driver'.tr(context)), style: AppStyle.normal25),
               ),
             ],
           ),
