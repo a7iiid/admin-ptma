@@ -17,16 +17,26 @@ class MapPage extends StatefulWidget {
 
 class _MapPageState extends State<MapPage> {
   @override
-  void didChangeDependencies() async {
-    // // log('${MapCubit.get(context).markers}=============================');
-
-    // if (MapCubit.get(context).selectedBus != null) {
-    //   MapCubit.get(context).displayBusPoint(
-    //     await MapCubit.get(context).getRouteBusData(),
-    //   );
-    // }
-    // // TODO: implement didChangeDependencies
+  void didChangeDependencies() {
     super.didChangeDependencies();
+
+    // Listen for bus location changes
+    var cubit = MapCubit.get(context);
+    cubit.busLocationStream.listen((busLocation) {
+      _animateCameraToNewPosition(busLocation);
+    });
+  }
+
+  void _animateCameraToNewPosition(LatLng newPosition) {
+    final cubit = MapCubit.get(context);
+
+    if (cubit.googleMapController != null) {
+      cubit.googleMapController!
+          .animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
+        target: newPosition,
+        zoom: 15,
+      )));
+    }
   }
 
   @override
@@ -34,34 +44,39 @@ class _MapPageState extends State<MapPage> {
     var cubit = MapCubit.get(context);
     return BlocBuilder<MapCubit, MapState>(builder: (context, state) {
       return PopScope(
-          canPop: true,
-          onPopInvoked: (didPop) {
-            MapCubit.get(context).clear();
+        canPop: true,
+        onPopInvoked: (didPop) {
+          MapCubit.get(context).clear();
+        },
+        child: GoogleMap(
+          myLocationEnabled: true,
+          myLocationButtonEnabled: false,
+          zoomControlsEnabled: false,
+          mapType: MapType.normal,
+          initialCameraPosition: CameraPosition(
+            target: cubit.selectedBus != null
+                ? LatLng(cubit.selectedBus!.busLocation.latitude,
+                    cubit.selectedBus!.busLocation.longitude)
+                : LatLng(cubit.userLocationData!.latitude,
+                    cubit.userLocationData!.longitude),
+            zoom: 15,
+          ),
+          onMapCreated: (controller) {
+            cubit.googleMapController = controller;
           },
-          child: GoogleMap(
-            myLocationEnabled: true,
-            myLocationButtonEnabled: false,
-            zoomControlsEnabled: false,
-            mapType: MapType.normal,
-            initialCameraPosition: CameraPosition(
-              target: LatLng(cubit.selectedBus!.busLocation.latitude,
-                      cubit.selectedBus!.busLocation.longitude) ??
-                  const LatLng(32.409161, 31.279642),
-              zoom: 15,
-            ),
-            onMapCreated: (controller) {
-              cubit.googleMapController = controller;
-            },
-            onTap: (destnation) async {
-              try {
-                cubit.userDestnationData =
-                    LatLng(destnation.latitude, destnation.longitude);
-                cubit.displayUserPoint(await cubit.getRouteUserData());
-              } catch (e) {}
-            },
-            markers: cubit.markers,
-            polylines: cubit.polylines,
-          ));
+          onTap: (destination) async {
+            try {
+              cubit.userDestnationData =
+                  LatLng(destination.latitude, destination.longitude);
+              cubit.displayUserPoint(await cubit.getRouteUserData());
+            } catch (e) {
+              log(e.toString());
+            }
+          },
+          markers: cubit.markers,
+          polylines: cubit.polylines,
+        ),
+      );
     });
   }
 }

@@ -23,9 +23,9 @@ class MapRouteBus extends StatefulWidget {
 }
 
 class _MapRouteBusState extends State<MapRouteBus> {
-  @override
   StationModel? distnationStation;
 
+  @override
   Widget build(BuildContext context) {
     var cubit = MapCubit.get(context);
     return PopScope(
@@ -33,34 +33,36 @@ class _MapRouteBusState extends State<MapRouteBus> {
         cubit.clear();
       },
       child: Scaffold(
-          appBar: AppBar(
-            title: Text("Map".tr(context)),
-          ),
-          body: Stack(
-            children: [
-              StreamBuilder<DocumentSnapshot>(
-                  stream: cubit.selectedBus != null
-                      ? FirebaseFirestore.instance
-                          .collection("bus")
-                          .doc(cubit.selectedBus!.id)
-                          .snapshots()
-                      : null,
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData && cubit.selectedBus != null) {
-                      cubit.setSelectedBus(BusModel.fromJson(
-                          snapshot.data!.data() as Map<String, dynamic>,
-                          cubit.selectedBus!.id));
+        appBar: AppBar(
+          title: Text("Map".tr(context)),
+        ),
+        body: Stack(
+          children: [
+            StreamBuilder<DocumentSnapshot>(
+              stream: cubit.selectedBus != null
+                  ? FirebaseFirestore.instance
+                      .collection("bus")
+                      .doc(cubit.selectedBus!.id)
+                      .snapshots()
+                  : null,
+              builder: (context, snapshot) {
+                if (snapshot.hasData && cubit.selectedBus != null) {
+                  cubit.setSelectedBus(BusModel.fromJson(
+                      snapshot.data!.data() as Map<String, dynamic>,
+                      cubit.selectedBus!.id));
 
-                      cubit.displaySelectedBusLocation();
-                    }
-                    return SizedBox(
-                      width: double.infinity,
-                      height: MediaQuery.sizeOf(context).height,
-                      child: MapPage(),
-                    );
-                  }),
-            ],
-          )),
+                  cubit.displaySelectedBusLocation();
+                }
+                return SizedBox(
+                  width: double.infinity,
+                  height: MediaQuery.sizeOf(context).height,
+                  child: MapPage(),
+                );
+              },
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

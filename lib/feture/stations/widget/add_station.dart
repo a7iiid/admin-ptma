@@ -68,6 +68,21 @@ class _AddStationState extends State<AddStation> {
           await MapCubit.get(context).clear();
         },
         child: Scaffold(
+          appBar: AppBar(
+            flexibleSpace: Container(
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Color.fromARGB(255, 235, 236, 241),
+                    Color.fromARGB(255, 222, 228, 234),
+                  ],
+                ),
+              ),
+            ),
+            title: Text('Stations'.tr(context)), // Replace with your title
+          ),
           body: GoogleMap(
             myLocationEnabled: true,
             myLocationButtonEnabled: false,

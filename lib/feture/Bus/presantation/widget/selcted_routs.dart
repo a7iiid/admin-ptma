@@ -1,3 +1,4 @@
+import 'package:admin/core/utils/localization/app_localaization.dart';
 import 'package:admin/feture/Bus/presantation/widget/add_bus.dart';
 import 'package:admin/feture/Bus/presantation/widget/bus_list.dart';
 import 'package:flutter/cupertino.dart';
@@ -33,6 +34,21 @@ class _SelectRoutsState extends State<SelectRouts> {
     var cubit = SelectRoutCubit.get(context);
 
     return Scaffold(
+        appBar: AppBar(
+          flexibleSpace: Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Color(0xff667eea),
+                  Color(0xff64b6ff),
+                ],
+              ),
+            ),
+          ),
+          title: Text('Bus'.tr(context)), // Replace with your title
+        ),
         floatingActionButton: FloatingActionButton(
           backgroundColor: Colors.lightBlue[50],
           onPressed: () {
@@ -58,21 +74,6 @@ class _SelectRoutsState extends State<SelectRouts> {
           child: SafeArea(
               child: Column(
             children: [
-              Stack(
-                clipBehavior: Clip.none,
-                children: [
-                  const HeadHomePageShape(),
-                  Positioned(
-                    top: MediaQuery.sizeOf(context).height * .05,
-                    child: const DrawerBottom(),
-                  ),
-                  Positioned(
-                      top: MediaQuery.sizeOf(context).height * .1,
-                      child: const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 15.0),
-                          child: Greetingslogin())),
-                ],
-              ),
               const SizedBox(
                 height: 20,
               ),

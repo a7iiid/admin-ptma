@@ -119,4 +119,8 @@ class SelectRoutCubit extends Cubit<SelectRoutState> {
     });
     emit(AddBusState());
   }
+
+  void setSelectBus(int index) {
+    selectBus = busModel[index];
+  }
 }

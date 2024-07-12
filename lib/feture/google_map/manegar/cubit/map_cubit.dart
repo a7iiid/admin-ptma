@@ -95,7 +95,6 @@ class MapCubit extends Cubit<MapState> {
     streamStation().listen((fetchedStation) async {
       try {
         stationModel = fetchedStation;
-        log(stationModel.toString());
         setStation();
 
         emit(SuccessLoding());
@@ -194,7 +193,8 @@ class MapCubit extends Cubit<MapState> {
 
   void setSelectedBus(BusModel busModel) {
     selectedBus = busModel;
-    log("${selectedBus!.startStation.latitude} ${selectedBus!.endStation.latitude}");
+    // googleMapController!.animateCamera(CameraUpdate.newLatLng(LatLng(
+    //     selectedBus!.busLocation.latitude, selectedBus!.busLocation.latitude)));
     emit(SetSelectedBus());
   }
 
@@ -237,4 +237,24 @@ class MapCubit extends Cubit<MapState> {
         .delete();
     emit(DeleteStation());
   }
+
+  Stream<LatLng> get busLocationStream => FirebaseFirestore.instance
+          .collection('bus')
+          .doc(selectedBus!.id)
+          .snapshots()
+          .map((snapshot) {
+        BusModel bus = BusModel.fromJson(snapshot.data()!, snapshot.id);
+        return (LatLng(bus.busLocation.latitude, bus.busLocation.longitude));
+      });
+  // Future<void> cameraPostion() async {
+  //   if (selectedBus != null) {
+  //     LatLng busLocation = LatLng(selectedBus!.busLocation.latitude,
+  //         selectedBus!.busLocation.longitude);
+  //     CameraPosition cameraPosition = CameraPosition(
+  //       target: busLocation,
+  //       zoom: 15.0,
+  //     );
+  //     emit(CameraPositionSet());
+  //   }
+  // }
 }

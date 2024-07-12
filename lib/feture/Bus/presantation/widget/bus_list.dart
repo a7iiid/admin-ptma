@@ -28,7 +28,7 @@ class bodySelecteRout extends StatelessWidget {
                       title: Text(cubit.busModel[index].busname),
                       trailing: Text(cubit.busModel[index].busnumber),
                       onLongPress: () {
-                        cubit.selectBus = cubit.busModel[index];
+                        cubit.setSelectBus(index);
                         Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) => EditBus()),
@@ -39,9 +39,8 @@ class bodySelecteRout extends StatelessWidget {
                           // var result = await cubit.destans(
                           //     distnationLocation, busLocation);
                           // cubit.busModel[index].duration = result;
-                          var select = cubit.busModel[index];
-                          cubit.selectBus = cubit.busModel[index];
-                          MapCubit.get(context).setSelectedBus(select);
+                          cubit.setSelectBus(index);
+                          MapCubit.get(context).setSelectedBus(cubit.selectBus);
                           Navigator.push(
                             context,
                             MaterialPageRoute(

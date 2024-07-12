@@ -40,3 +40,5 @@ final class MapClear extends MapState {}
 final class BusModelsUpdated extends MapState {}
 
 final class DeleteStation extends MapState {}
+
+final class CameraPositionSet extends MapState {}
