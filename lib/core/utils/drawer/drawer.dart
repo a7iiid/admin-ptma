@@ -47,6 +47,13 @@ class CustomeDrawer extends StatelessWidget {
                     ),
                     const UserImage(),
                     ListTile(
+                      title: Text("Home".tr(context)),
+                      leading: Icon(Icons.home),
+                      onTap: () async {
+                        GoRouter.of(context).pushReplacement(Routes.kHomePage);
+                      },
+                    ),
+                    ListTile(
                       onTap: () {
                         GoRouter.of(context).push(Routes.kEditProfilePage);
                       },

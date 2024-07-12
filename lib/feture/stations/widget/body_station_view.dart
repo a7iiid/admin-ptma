@@ -1,3 +1,4 @@
+import 'package:admin/core/utils/localization/app_localaization.dart';
 import 'package:admin/feture/stations/widget/add_station.dart';
 import 'package:admin/feture/stations/widget/station_body_list.dart';
 import 'package:flutter/material.dart';
@@ -32,6 +33,21 @@ class _BodyStationViewState extends State<BodyStationView> {
     var cubit = MapCubit.get(context);
 
     return Scaffold(
+        appBar: AppBar(
+          flexibleSpace: Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Color(0xff667eea),
+                  Color(0xff64b6ff),
+                ],
+              ),
+            ),
+          ),
+          title: Text('Stations'.tr(context)), // Replace with your title
+        ),
         floatingActionButton: FloatingActionButton(
           backgroundColor: Colors.white,
           onPressed: () {
@@ -57,21 +73,6 @@ class _BodyStationViewState extends State<BodyStationView> {
           child: SafeArea(
               child: Column(
             children: [
-              Stack(
-                clipBehavior: Clip.none,
-                children: [
-                  const HeadHomePageShape(),
-                  Positioned(
-                    top: MediaQuery.sizeOf(context).height * .05,
-                    child: const DrawerBottom(),
-                  ),
-                  Positioned(
-                      top: MediaQuery.sizeOf(context).height * .1,
-                      child: const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 15.0),
-                          child: Greetingslogin())),
-                ],
-              ),
               const SizedBox(
                 height: 20,
               ),

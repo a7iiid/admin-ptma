@@ -44,8 +44,9 @@ class _MapPageState extends State<MapPage> {
             zoomControlsEnabled: false,
             mapType: MapType.normal,
             initialCameraPosition: CameraPosition(
-              target:
-                  cubit.userLocationData ?? const LatLng(32.409161, 31.279642),
+              target: LatLng(cubit.selectedBus!.busLocation.latitude,
+                      cubit.selectedBus!.busLocation.longitude) ??
+                  const LatLng(32.409161, 31.279642),
               zoom: 15,
             ),
             onMapCreated: (controller) {

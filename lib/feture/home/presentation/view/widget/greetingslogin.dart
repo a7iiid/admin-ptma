@@ -24,7 +24,8 @@ class Greetingslogin extends StatelessWidget {
                 DateTime.now().hour < 12
                     ? " ${"Good morning".tr(context)} "
                     : "${"Good evening".tr(context)} ",
-                style: AppStyle.normal40,
+                style: AppStyle.normal40
+                    .copyWith(fontSize: MediaQuery.sizeOf(context).width * .1),
               ),
               if (DateTime.now().hour < 12)
                 const Icon(

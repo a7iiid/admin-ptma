@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:admin/core/utils/localization/app_localaization.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -32,52 +33,34 @@ class _MapRouteBusState extends State<MapRouteBus> {
         cubit.clear();
       },
       child: Scaffold(
+          appBar: AppBar(
+            title: Text("Map".tr(context)),
+          ),
           body: Stack(
-        children: [
-          StreamBuilder<DocumentSnapshot>(
-              stream: cubit.selectedBus != null
-                  ? FirebaseFirestore.instance
-                      .collection("bus")
-                      .doc(cubit.selectedBus!.id)
-                      .snapshots()
-                  : null,
-              builder: (context, snapshot) {
-                if (snapshot.hasData && cubit.selectedBus != null) {
-                  cubit.setSelectedBus(BusModel.fromJson(
-                      snapshot.data!.data() as Map<String, dynamic>,
-                      cubit.selectedBus!.id));
-
-                  cubit.displaySelectedBusLocation();
-                }
-                return SizedBox(
-                  width: double.infinity,
-                  height: MediaQuery.sizeOf(context).height,
-                  child: MapPage(),
-                );
-              }),
-          Column(
-            mainAxisSize: MainAxisSize.min,
             children: [
-              const SizedBox(
-                height: 40,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 14.0),
-                child: DropMenuItem(
-                  location: distnationStation,
-                  onChanged: (value) async {
-                    distnationStation = value;
-                    cubit.userDestnationData = LatLng(
-                        value!.stationLocation.latitude,
-                        value.stationLocation.longitude);
-                    cubit.displayUserPoint(await cubit.getRouteUserData());
-                  },
-                ),
-              ),
+              StreamBuilder<DocumentSnapshot>(
+                  stream: cubit.selectedBus != null
+                      ? FirebaseFirestore.instance
+                          .collection("bus")
+                          .doc(cubit.selectedBus!.id)
+                          .snapshots()
+                      : null,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData && cubit.selectedBus != null) {
+                      cubit.setSelectedBus(BusModel.fromJson(
+                          snapshot.data!.data() as Map<String, dynamic>,
+                          cubit.selectedBus!.id));
+
+                      cubit.displaySelectedBusLocation();
+                    }
+                    return SizedBox(
+                      width: double.infinity,
+                      height: MediaQuery.sizeOf(context).height,
+                      child: MapPage(),
+                    );
+                  }),
             ],
-          )
-        ],
-      )),
+          )),
     );
   }
 }
