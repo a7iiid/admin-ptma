@@ -2,6 +2,7 @@ import 'package:admin/core/utils/localization/app_localaization.dart';
 import 'package:admin/feture/driver/data/manger/cubit/driver_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import '../../../../core/utils/Style.dart';
 import '../../data/model/Driver.dart';
 
 class AddDriverBody extends StatefulWidget {
@@ -32,27 +33,33 @@ class _AddDriverBodyState extends State<AddDriverBody> {
     super.dispose();
   }
 
+  InputDecoration getInputDecoration(String labelText, BuildContext context) {
+    return InputDecoration(
+      labelText: labelText.tr(context),
+      hintStyle: AppStyle.normal24.copyWith(fontSize: 18),
+      labelStyle: AppStyle.normal24.copyWith(fontSize: 18),
+      enabledBorder: const OutlineInputBorder(
+        borderSide: BorderSide(color: Colors.white),
+      ),
+      focusedBorder: const OutlineInputBorder(
+        borderSide: BorderSide(color: Colors.white),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          ('Add Driver'.tr(context)),
-        ),
-        centerTitle: true,
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
+    return SingleChildScrollView(
+      child: Form(
+        key: _formKey,
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               TextFormField(
+                style: TextStyle(color: Colors.lightBlue[50]),
                 controller: _nameController,
-                decoration: InputDecoration(
-                  labelText: ('Name'.tr(context)),
-                ),
+                decoration: getInputDecoration('Name', context),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return ('Please enter a name'.tr(context));
@@ -62,10 +69,9 @@ class _AddDriverBodyState extends State<AddDriverBody> {
               ),
               SizedBox(height: 16.0),
               TextFormField(
+                style: TextStyle(color: Colors.lightBlue[50]),
                 controller: _emailController,
-                decoration: InputDecoration(
-                  labelText: ('Email'.tr(context)),
-                ),
+                decoration: getInputDecoration('Email', context),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return ('Please enter an email'.tr(context));
@@ -75,10 +81,9 @@ class _AddDriverBodyState extends State<AddDriverBody> {
               ),
               SizedBox(height: 16.0),
               TextFormField(
+                style: TextStyle(color: Colors.lightBlue[50]),
                 controller: _phoneController,
-                decoration: InputDecoration(
-                  labelText: 'Phone'.tr(context),
-                ),
+                decoration: getInputDecoration('Phone', context),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return ('Please enter a phone number'.tr(context));
@@ -88,10 +93,9 @@ class _AddDriverBodyState extends State<AddDriverBody> {
               ),
               SizedBox(height: 16.0),
               TextFormField(
+                style: TextStyle(color: Colors.lightBlue[50]),
                 controller: _busNumController,
-                decoration: InputDecoration(
-                  labelText: ('Bus Number'.tr(context)),
-                ),
+                decoration: getInputDecoration('Bus Number', context),
                 keyboardType: TextInputType.number,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -102,10 +106,9 @@ class _AddDriverBodyState extends State<AddDriverBody> {
               ),
               SizedBox(height: 16.0),
               TextFormField(
+                style: TextStyle(color: Colors.lightBlue[50]),
                 controller: _salaryController,
-                decoration: InputDecoration(
-                  labelText: ('Salary'.tr(context)),
-                ),
+                decoration: getInputDecoration('Salary', context),
                 keyboardType: TextInputType.number,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -114,7 +117,6 @@ class _AddDriverBodyState extends State<AddDriverBody> {
                   return null;
                 },
               ),
-              SizedBox(height: 16.0),
               SizedBox(height: 30.0),
               ElevatedButton(
                 onPressed: () async {

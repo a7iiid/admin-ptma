@@ -49,105 +49,108 @@ class AddBus extends StatelessWidget {
             ],
           ),
         ),
-        child: ListView(
-          children: [
-            const SizedBox(
-              height: 30,
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: TextFormField(
-                    style: TextStyle(color: Colors.lightBlue[50]),
-                    controller: nameBus,
-                    decoration: InputDecoration(
-                      labelText: 'Bus Name'.tr(context),
-                      hintStyle: AppStyle.normal24.copyWith(fontSize: 18),
-                      labelStyle: AppStyle.normal24.copyWith(fontSize: 18),
-                      enabledBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white),
-                      ),
-                      focusedBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white),
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(width: 16.0),
-                Expanded(
-                  child: TextFormField(
-                    controller: numBus,
-                    style: TextStyle(color: Colors.lightBlue[50]),
-                    decoration: InputDecoration(
-                      labelText: 'Bus Number'.tr(context),
-                      hintStyle: AppStyle.normal24.copyWith(fontSize: 18),
-                      labelStyle: AppStyle.normal24.copyWith(fontSize: 18),
-                      enabledBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white),
-                      ),
-                      focusedBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white),
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: ListView(
+            children: [
+              const SizedBox(
+                height: 30,
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: TextFormField(
+                      style: TextStyle(color: Colors.lightBlue[50]),
+                      controller: nameBus,
+                      decoration: InputDecoration(
+                        labelText: 'Bus Name'.tr(context),
+                        hintStyle: AppStyle.normal24.copyWith(fontSize: 18),
+                        labelStyle: AppStyle.normal24.copyWith(fontSize: 18),
+                        enabledBorder: const OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.white),
+                        ),
+                        focusedBorder: const OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.white),
+                        ),
                       ),
                     ),
                   ),
-                )
-              ],
-            ),
-            SizedBox(height: 30),
-            DropMenuItem(
-              location: sourseStation,
-              onChanged: (value) {
-                sourseStation = value;
-              },
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            DropMenuItem(
-              location: distnationStation,
-              onChanged: (value) {
-                distnationStation = value;
-              },
-            ),
-            SizedBox(height: 24.0),
-            Row(
-              children: [
-                BlocBuilder<SelectRoutCubit, SelectRoutState>(
-                  builder: (context, state) {
-                    return Checkbox(
-                      value: isActive,
-                      checkColor: Colors.blue,
-                      activeColor: Colors.white,
-                      onChanged: (bool? value) {
-                        isActive = value ?? true;
-                        SelectRoutCubit.get(context).enabelBus();
-                      },
-                    );
-                  },
-                ),
-                Text(
-                  'Is Active'.tr(context),
-                  style: AppStyle.normal24,
-                )
-              ],
-            ),
-            const SizedBox(height: 24.0),
-            ElevatedButton(
-              onPressed: () async {
-                Bus bus = Bus(
-                    busLocation: GeoPoint(32.4, 35.1),
-                    busname: nameBus.text,
-                    busnumber: numBus.text,
-                    isActive: isActive,
-                    endStation: distnationStation!.stationLocation,
-                    startStation: sourseStation!.stationLocation);
+                  SizedBox(width: 16.0),
+                  Expanded(
+                    child: TextFormField(
+                      controller: numBus,
+                      style: TextStyle(color: Colors.lightBlue[50]),
+                      decoration: InputDecoration(
+                        labelText: 'Bus Number'.tr(context),
+                        hintStyle: AppStyle.normal24.copyWith(fontSize: 18),
+                        labelStyle: AppStyle.normal24.copyWith(fontSize: 18),
+                        enabledBorder: const OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.white),
+                        ),
+                        focusedBorder: const OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+              SizedBox(height: 30),
+              DropMenuItem(
+                location: sourseStation,
+                onChanged: (value) {
+                  sourseStation = value;
+                },
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              DropMenuItem(
+                location: distnationStation,
+                onChanged: (value) {
+                  distnationStation = value;
+                },
+              ),
+              SizedBox(height: 24.0),
+              Row(
+                children: [
+                  BlocBuilder<SelectRoutCubit, SelectRoutState>(
+                    builder: (context, state) {
+                      return Checkbox(
+                        value: isActive,
+                        checkColor: Colors.blue,
+                        activeColor: Colors.white,
+                        onChanged: (bool? value) {
+                          isActive = value ?? true;
+                          SelectRoutCubit.get(context).enabelBus();
+                        },
+                      );
+                    },
+                  ),
+                  Text(
+                    'Is Active'.tr(context),
+                    style: AppStyle.normal24,
+                  )
+                ],
+              ),
+              const SizedBox(height: 24.0),
+              ElevatedButton(
+                onPressed: () async {
+                  Bus bus = Bus(
+                      busLocation: GeoPoint(32.4, 35.1),
+                      busname: nameBus.text,
+                      busnumber: numBus.text,
+                      isActive: isActive,
+                      endStation: distnationStation!.stationLocation,
+                      startStation: sourseStation!.stationLocation);
 
-                await SelectRoutCubit.get(context).addBus(bus);
-                Navigator.pop(context); // Close the edit page after saving
-              },
-              child: Text('Save'),
-            ),
-          ],
+                  await SelectRoutCubit.get(context).addBus(bus);
+                  Navigator.pop(context); // Close the edit page after saving
+                },
+                child: Text('Save'),
+              ),
+            ],
+          ),
         ),
       ),
     );

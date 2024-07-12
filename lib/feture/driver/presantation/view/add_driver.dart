@@ -35,12 +35,36 @@ class _AddDriverState extends State<AddDriver> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        // appBar: AppBar(
-        //   title: Text(
-        //     'Add Driver'.tr(context),
-        //   ),
-        //   centerTitle: true,
-        // ),
-        body: AddDriverBody());
+        appBar: AppBar(
+          flexibleSpace: Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Color(0xff667eea),
+                  Color(0xff64b6ff),
+                ],
+              ),
+            ),
+          ),
+          title: Text(
+            ('Add Driver'.tr(context)),
+          ),
+          centerTitle: true,
+        ),
+        body: Container(
+            height: MediaQuery.sizeOf(context).height,
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Color(0xff667eea),
+                  Color(0xff64b6ff),
+                ],
+              ),
+            ),
+            child: AddDriverBody()));
   }
 }
