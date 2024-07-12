@@ -45,9 +45,9 @@ class _AddStationState extends State<AddStation> {
             TextButton(
               onPressed: () async {
                 if (stationName.text.isNotEmpty) {
-                  await MapCubit.get(context).addStation(stationName.text);
-
                   Navigator.of(context).pop(); // Close the dialog
+
+                  await MapCubit.get(context).addStation(stationName.text);
                 }
               },
               child: Text('Save'.tr(context)),

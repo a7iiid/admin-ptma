@@ -23,18 +23,22 @@ class SettingsBody extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 20),
       child: Column(
         children: [
-          ListTile(
-            title: Text("Language".tr(context)),
-            trailing: customDropDownButton(context, menu, langValue),
+          Card(
+            child: ListTile(
+              title: Text("Language".tr(context)),
+              trailing: customDropDownButton(context, menu, langValue),
+            ),
           ),
           const Divider(),
-          ListTile(
-            title: Text("Account".tr(context)),
-            trailing: Transform.rotate(
-                angle: pi, child: Icon(Icons.arrow_back_ios_new)),
-            onTap: () {
-              GoRouter.of(context).push(Routes.kEditProfilePage);
-            },
+          Card(
+            child: ListTile(
+              title: Text("Account".tr(context)),
+              trailing: Transform.rotate(
+                  angle: pi, child: Icon(Icons.arrow_back_ios_new)),
+              onTap: () {
+                GoRouter.of(context).push(Routes.kEditProfilePage);
+              },
+            ),
           ),
           const Divider()
         ],

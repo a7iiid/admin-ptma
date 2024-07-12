@@ -33,6 +33,7 @@ class _BodyStationViewState extends State<BodyStationView> {
 
     return Scaffold(
         floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.white,
           onPressed: () {
             Navigator.push(
               context,
@@ -42,33 +43,45 @@ class _BodyStationViewState extends State<BodyStationView> {
           child: Icon(Icons.add),
         ),
         drawer: const CustomeDrawer(),
-        body: SafeArea(
-            child: Column(
-          children: [
-            Stack(
-              clipBehavior: Clip.none,
-              children: [
-                const HeadHomePageShape(),
-                Positioned(
-                  top: MediaQuery.sizeOf(context).height * .05,
-                  child: const DrawerBottom(),
-                ),
-                Positioned(
-                    top: MediaQuery.sizeOf(context).height * .1,
-                    child: const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 15.0),
-                        child: Greetingslogin())),
+        body: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Color(0xff667eea),
+                Color(0xff64b6ff),
               ],
             ),
-            const SizedBox(
-              height: 20,
-            ),
-            BlocConsumer<MapCubit, MapState>(listener: (context, state) {
-              // TODO: implement listener
-            }, builder: (context, state) {
-              return StationBodyList();
-            }),
-          ],
-        )));
+          ),
+          child: SafeArea(
+              child: Column(
+            children: [
+              Stack(
+                clipBehavior: Clip.none,
+                children: [
+                  const HeadHomePageShape(),
+                  Positioned(
+                    top: MediaQuery.sizeOf(context).height * .05,
+                    child: const DrawerBottom(),
+                  ),
+                  Positioned(
+                      top: MediaQuery.sizeOf(context).height * .1,
+                      child: const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 15.0),
+                          child: Greetingslogin())),
+                ],
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              BlocConsumer<MapCubit, MapState>(listener: (context, state) {
+                // TODO: implement listener
+              }, builder: (context, state) {
+                return StationBodyList();
+              }),
+            ],
+          )),
+        ));
   }
 }

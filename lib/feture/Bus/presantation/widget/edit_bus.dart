@@ -12,6 +12,18 @@ class EditBus extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Color(0xff667eea),
+                Color(0xff64b6ff),
+              ],
+            ),
+          ),
+        ),
         title: Text(
           "Edit Bus".tr(
             context,
@@ -19,7 +31,18 @@ class EditBus extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: EditBusBody(bus: SelectRoutCubit.get(context).selectBus),
+      body: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Color(0xff667eea),
+                Color(0xff64b6ff),
+              ],
+            ),
+          ),
+          child: EditBusBody()),
     );
   }
 }

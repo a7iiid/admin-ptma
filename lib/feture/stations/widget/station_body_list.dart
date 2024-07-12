@@ -59,27 +59,30 @@ class StationBodyList extends StatelessWidget {
             child: ListView.builder(
                 itemCount: cubit.stationModel.length,
                 itemBuilder: (context, index) {
-                  return Column(mainAxisSize: MainAxisSize.min, children: [
-                    ListTile(
-                      title: Text(cubit.stationModel[index].name),
-                      onLongPress: () => AwesomeDialog(
-                        context: context,
-                        dialogType: DialogType.warning,
-                        animType: AnimType.bottomSlide,
-                        title: 'Delete'.tr(context),
-                        desc: 'Are You Sure'.tr(context),
-                        btnCancelOnPress: () {},
-                        btnOkOnPress: () async {
-                          await cubit.deleteStation(cubit.stationModel[index]);
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Card(
+                      child: ListTile(
+                        title: Text(cubit.stationModel[index].name),
+                        onLongPress: () => AwesomeDialog(
+                          context: context,
+                          dialogType: DialogType.warning,
+                          animType: AnimType.bottomSlide,
+                          title: 'Delete'.tr(context),
+                          desc: 'Are You Sure'.tr(context),
+                          btnCancelOnPress: () {},
+                          btnOkOnPress: () async {
+                            await cubit
+                                .deleteStation(cubit.stationModel[index]);
+                          },
+                        )..show(),
+                        onTap: () async {
+                          cubit.selectStation = cubit.stationModel[index];
+                          _showEditDialog(context);
                         },
-                      )..show(),
-                      onTap: () async {
-                        cubit.selectStation = cubit.stationModel[index];
-                        _showEditDialog(context);
-                      },
+                      ),
                     ),
-                    Divider()
-                  ]);
+                  );
                 }));
       },
     );

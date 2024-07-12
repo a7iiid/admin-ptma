@@ -44,41 +44,53 @@ class _SelectRoutsState extends State<SelectRouts> {
           child: Icon(Icons.add),
         ),
         drawer: CustomeDrawer(),
-        body: SafeArea(
-            child: Column(
-          children: [
-            Stack(
-              clipBehavior: Clip.none,
-              children: [
-                const HeadHomePageShape(),
-                Positioned(
-                  top: MediaQuery.sizeOf(context).height * .05,
-                  child: const DrawerBottom(),
-                ),
-                Positioned(
-                    top: MediaQuery.sizeOf(context).height * .1,
-                    child: const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 15.0),
-                        child: Greetingslogin())),
+        body: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Color(0xff667eea),
+                Color(0xff64b6ff),
               ],
             ),
-            const SizedBox(
-              height: 20,
-            ),
-            BlocConsumer<SelectRoutCubit, SelectRoutState>(
-                listener: (context, state) {
-              // TODO: implement listener
-            }, builder: (context, state) {
-              if (state is LodingBus) {
-                return const Center(child: CircularProgressIndicator());
-              } else if (state is StreamBusModel) {
-                return const bodySelecteRout();
-              } else {
-                SelectRoutCubit.get(context).loadBusModels();
-                return const Center(child: CircularProgressIndicator());
-              }
-            }),
-          ],
-        )));
+          ),
+          child: SafeArea(
+              child: Column(
+            children: [
+              Stack(
+                clipBehavior: Clip.none,
+                children: [
+                  const HeadHomePageShape(),
+                  Positioned(
+                    top: MediaQuery.sizeOf(context).height * .05,
+                    child: const DrawerBottom(),
+                  ),
+                  Positioned(
+                      top: MediaQuery.sizeOf(context).height * .1,
+                      child: const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 15.0),
+                          child: Greetingslogin())),
+                ],
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              BlocConsumer<SelectRoutCubit, SelectRoutState>(
+                  listener: (context, state) {
+                // TODO: implement listener
+              }, builder: (context, state) {
+                if (state is LodingBus) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (state is StreamBusModel) {
+                  return const bodySelecteRout();
+                } else {
+                  SelectRoutCubit.get(context).loadBusModels();
+                  return const Center(child: CircularProgressIndicator());
+                }
+              }),
+            ],
+          )),
+        ));
   }
 }

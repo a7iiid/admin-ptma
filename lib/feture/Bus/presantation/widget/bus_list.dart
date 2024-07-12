@@ -22,7 +22,7 @@ class bodySelecteRout extends StatelessWidget {
                 itemCount: cubit.busModel.length,
                 itemBuilder: (context, index) {
                   return Card(
-                    color: Colors.lightBlue[50],
+                    color: Colors.white,
                     margin: EdgeInsets.symmetric(vertical: 8.0),
                     child: ListTile(
                       title: Text(cubit.busModel[index].busname),
