@@ -24,7 +24,8 @@ class UserImage extends StatelessWidget {
         shape: BoxShape.circle,
       ),
       child: FirebaseAuth.instance.currentUser!.photoURL == null
-          ? SvgPicture.asset(Assets.imagesUserProfilSvg)
+          ? Image.network(
+              "https://firebasestorage.googleapis.com/v0/b/ptma-9c13f.appspot.com/o/cms_uploads%2FUsers%2F1718225499895000%2Fistockphoto-1316420668-612x612.jpg?alt=media&token=1192bb4d-b7de-41d9-a982-824becc7a452")
           : Image.network(FirebaseAuth.instance.currentUser!.photoURL!),
     );
   }
